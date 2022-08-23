@@ -1,23 +1,11 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {ActionType} from '../Redux/Contants/action-type';
-
+import FeaturedCard from '../Components/Cards/FeaturedCard';
 
 const Home = () => {
-  const {count} = useSelector((state) => state.counter);
-  const dispatch = useDispatch();
   return (
     <div
       className='w-screen h-80 flex justify-center items-center flex-col gap-8'>
-      <h1>{count}</h1>
-      <div className='flex gap-2'>
-        <button onClick={()=>{
-          dispatch({type: ActionType.INCREMENT});
-        }}>Increment</button>
-        <button onClick={()=>{
-          dispatch({type: ActionType.DECREMENT});
-        }}>Decrement</button>
-      </div>
+      <FeaturedCard image={'https://images.unsplash.com/photo-1553272725-086100aecf5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2865&q=80'}/>
     </div>
   );
 };
