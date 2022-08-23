@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
+import SearchButton from '../Components/Buttons/SearchButton';
 import {ActionType} from '../Redux/Contants/action-type';
 
 
@@ -14,9 +15,9 @@ const Home = () => {
         <button onClick={()=>{
           dispatch({type: ActionType.INCREMENT});
         }}>Increment</button>
-        <button onClick={()=>{
+        <SearchButton width={'400px'} onClick={()=>{
           dispatch({type: ActionType.DECREMENT});
-        }}>Decrement</button>
+        }}/>
       </div>
     </div>
   );
