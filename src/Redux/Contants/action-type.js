@@ -1,4 +1,4 @@
 export const ActionType = {
-    INCREMENT: 'INCREMENT',
-    DECREMENT: 'DECREMENT',
-}
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT',
+};
