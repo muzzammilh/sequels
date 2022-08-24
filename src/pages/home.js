@@ -1,23 +1,19 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {ActionType} from '../Redux/Contants/action-type';
+import LeftBar from '../Components/NavBars/LeftBar';
+// import logo from '../Images/logo.svg';
+// import {useSelector, useDispatch} from 'react-redux';
+// import NavBar from '../Components/NavBars/NavBar';
+// import {ActionType} from '../Redux/Contants/action-type';
 
 
 const Home = () => {
-  const {count} = useSelector((state) => state.counter);
-  const dispatch = useDispatch();
+  // const {count} = useSelector((state) => state.counter);
+  // const dispatch = useDispatch();
   return (
     <div
       className='w-screen h-80 flex justify-center items-center flex-col gap-8'>
-      <h1>{count}</h1>
-      <div className='flex gap-2'>
-        <button onClick={()=>{
-          dispatch({type: ActionType.INCREMENT});
-        }}>Increment</button>
-        <button onClick={()=>{
-          dispatch({type: ActionType.DECREMENT});
-        }}>Decrement</button>
-      </div>
+      {/* <NavBar logoUrl={logo} profileUrl={'https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80'}/> */}
+      <LeftBar/>
     </div>
   );
 };
