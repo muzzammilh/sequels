@@ -111,6 +111,20 @@ const NavIcons = ({name, height, color, strokeWidth}) => {
             000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
         </svg>
       );
+    case 'menu':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" style={{height: height || '1.25rem'}} fill="none" viewBox="0 0 24 24" stroke={color || colors.primary} strokeWidth={strokeWidth || 2}>
+          <path strokeLinecap="round"
+            strokeLinejoin="round" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      );
+    case 'close':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" style={{height: height || '1.25rem'}} fill="none" viewBox="0 0 24 24" stroke={color || colors.primary} strokeWidth={strokeWidth || 2}>
+          <path strokeLinecap="round"
+            strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      );
     default:
       return <></>;
   }
