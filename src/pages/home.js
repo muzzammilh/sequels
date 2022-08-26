@@ -1,4 +1,6 @@
 import React from 'react';
+
+// import FeaturedCard from '../Components/Cards/FeaturedCard';
 // import LeftBar from '../Components/NavBars/LeftBar';
 import NavBar from '../Components/NavBars/NavBar';
 import TabBar from '../Components/NavBars/TabBar';
@@ -6,7 +8,6 @@ import TabBar from '../Components/NavBars/TabBar';
 // import {useSelector, useDispatch} from 'react-redux';
 // import NavBar from '../Components/NavBars/NavBar';
 // import {ActionType} from '../Redux/Contants/action-type';
-
 
 const Home = () => {
   // const {count} = useSelector((state) => state.counter);
