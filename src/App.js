@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 import Home from './pages/home';
 import Trending from './pages/trending';
 
@@ -15,7 +15,7 @@ const App = () => {
             <Trending />
           </Route>
         </Switch>
-        {/* <div>
+        <div>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -27,7 +27,7 @@ const App = () => {
               <Link to="/topics">Topics</Link>
             </li>
           </ul>
-        </div> */}
+        </div>
       </Router>
     </>
   );
