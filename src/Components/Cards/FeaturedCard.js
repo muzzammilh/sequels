@@ -8,11 +8,11 @@ const FeaturedCard = ({title, textColor, date, rate,
     <div className='max-w-screen-md w-full relative rounded-xl'
       style={{width, backgroundColor: backgroundColor || colors.primary}}>
       <div className='flex h-52 m-4' style={{color: textColor || colors.white}}>
-        <div className="w-48 h-full bg-black rounded-2xl overflow-hidden
-           shadow-lg transition-shadow "
+        <div className='w-48 h-full bg-black rounded-2xl overflow-hidden
+           shadow-lg transition-shadow'
         style={{height}}>
           {image&&<img src={image}
-            alt={title} className="w-full h-full object-cover"/>}
+            alt={title} className='w-full h-full object-cover'/>}
         </div>
         <div className='p-4 w-full'>
           <div className={'flex justify-between items-center'}>
@@ -24,7 +24,7 @@ const FeaturedCard = ({title, textColor, date, rate,
               <span>{rate || 3.8}</span>
             </div>
           </div>
-          <div className=' opacity-70 text-sm pt-4'>
+          <div className='opacity-70 text-sm pt-4'>
             <p>
               {description ||
                 // eslint-disable-next-line max-len

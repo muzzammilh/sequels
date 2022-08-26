@@ -3,12 +3,12 @@ import {Icon} from '../../Styles/icons';
 
 const VerticalCard = ({title, date, rate, image, width, height}) => {
   return (
-    <div className=' w-36' style={{width}}>
-      <div className="w-full h-48 rounded-2xl overflow-hidden
-      bg-purple-500 shadow-lg transition-shadow  "
+    <div className='w-36' style={{width}}>
+      <div className='w-full h-48 rounded-2xl overflow-hidden
+      bg-purple-500 shadow-lg transition-shadow'
       style={{height}}>
         {image&&<img src={image}
-          alt={title} className="w-full h-full object-cover"/>}
+          alt={title} className='w-full h-full object-cover'/>}
       </div>
       <div>
         <div className='pt-2'>
