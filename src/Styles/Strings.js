@@ -7,7 +7,7 @@ export const strings = {
   navButton6: 'Add Tv Show',
   navButton7: 'Settings',
   navButton8: 'Logout',
-  
+
   footerButton1: 'About TMDB',
   footerButton2: 'Contact Us',
   footerButton3: 'Support Forums',
