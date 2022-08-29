@@ -3,7 +3,7 @@ import React from 'react';
 const Movies = () => {
   return (
     <div>
-            Moivessm,nxs,xns,xn,snx
+            Moives
     </div>
   );
 };
