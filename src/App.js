@@ -22,8 +22,8 @@ const App = () => {
   return (
     <>
       <Router>
-        <div className='w-full md:w-[80%] min-h-screen float-right bg-gray-100
-         mt-32 md:mt-20 relative'>
+        <div className='w-full md:w-[80%] min-h-screen float-right
+         mt-32 md:mt-20 relative px-4'>
           <Switch>
             <Route path="/" exact>
               <Home />
