@@ -3,10 +3,14 @@ import React, {useState} from 'react';
 import NavIcons from '../../Styles/NavIcons';
 import {colors} from '../../theme/colors';
 const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
-  logoUrl, profileUrl, children}) => {
+  logoUrl, profileUrl, children, backgroundColor, className}) => {
    const [onPClick, setPClick] = useState(0);
   return (
-    <div className=' flex flex-col w-full px-4 justify-center items-center'>
+    <div className='relative'>
+      <div
+        className={[`pb-4 md:pb-0 flex flex-col w-full px-4 md:px-8 
+        justify-center items-center `, className]}
+      style={{backgroundColor: backgroundColor}}>
         <div className='w-full py-4 flex justify-between items-center'>
 
           {/* ------------ Logo ------------ */}
@@ -210,6 +214,7 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
         {/* ------------------------ */}
 
       </div>
+    </div>
   );
 };
 

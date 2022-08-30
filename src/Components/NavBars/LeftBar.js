@@ -11,12 +11,12 @@ const LeftBar = () => {
     <>
       {/* ------------ Desktop Left NavBar ------------ */}
 
-      <div className='hidden fixed left-0 top-0 h-screen
+      <div className='hidden absolute left-0 top-0 h-screen
        w-1/5 items-center md:flex z-40'>
         <div className='w-full'>
           <ul className='font-semibold text-sm'>
             <li>
-              <Link className='flex items-center my-10' to="/"
+              <Link className='flex items-center my-8' to={strings.navLink1}
                 onClick={()=>{
                   onclick!=0 && setonclick(0);
                 }}>
@@ -32,7 +32,7 @@ const LeftBar = () => {
                 {strings.navButton1}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink2}
                 onClick={()=>{
                   onclick!=1 && setonclick(1);
                 }}>
@@ -48,7 +48,7 @@ const LeftBar = () => {
                 {strings.navButton2}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink5}
                 onClick={()=>{
                   onclick!=2 && setonclick(2);
                 }}>
@@ -64,7 +64,7 @@ const LeftBar = () => {
                 {strings.navButton3}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink8}
                 onClick={()=>{
                   onclick!=3 && setonclick(3);
                 }}>
@@ -75,12 +75,12 @@ const LeftBar = () => {
                   style={onclick==3 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'more'}
+                  <NavIcons name={'people'}
                     color={onclick==3 ? colors.white : colors.primary}/></span>
-                {strings.navButton4}</Link>
+                {strings.navButton9}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink10}
                 onClick={()=>{
                   onclick!=4 && setonclick(4);
                 }}>
@@ -91,12 +91,12 @@ const LeftBar = () => {
                   style={onclick==4 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'add-movie'}
+                  <NavIcons name={'more'}
                     color={onclick==4 ? colors.white : colors.primary}/></span>
-                {strings.navButton5}</Link>
+                {strings.navButton4}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink3}
                 onClick={()=>{
                   onclick!=5 && setonclick(5);
                 }}>
@@ -107,12 +107,12 @@ const LeftBar = () => {
                   style={onclick==5 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'add-tv-show'}
+                  <NavIcons name={'add-movie'}
                     color={onclick==5 ? colors.white : colors.primary}/></span>
-                {strings.navButton6}</Link>
+                {strings.navButton5}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink6}
                 onClick={()=>{
                   onclick!=6 && setonclick(6);
                 }}>
@@ -123,8 +123,24 @@ const LeftBar = () => {
                   style={onclick==6 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'setting'}
+                  <NavIcons name={'add-tv-show'}
                     color={onclick==6 ? colors.white : colors.primary}/></span>
+                {strings.navButton6}</Link>
+            </li>
+            <li>
+              <Link className='flex items-center my-8 ' to={strings.navLink11}
+                onClick={()=>{
+                  onclick!=7 && setonclick(7);
+                }}>
+                <span
+                  className={[' px-2  h-10  flex justify-end items-center ',
+              onclick==7 ? ' w-4/12 rounded-r-full mr-2 ':
+              ' w-3/12 ']}
+                  style={onclick==7 ? {background: `linear-gradient(90deg, 
+                ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
+                >
+                  <NavIcons name={'setting'}
+                    color={onclick==7 ? colors.white : colors.primary}/></span>
                 {strings.navButton7}</Link>
             </li>
           </ul>
@@ -158,9 +174,10 @@ const LeftBar = () => {
           <ul className='font-semibold text-sm'
             style={{color: colors.primary}}>
             <li>
-              <Link className='flex items-center my-10' to="/"
+              <Link className='flex items-center my-8' to={strings.navLink1}
                 onClick={()=>{
                   onclick!=0 && setonclick(0);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -174,9 +191,10 @@ const LeftBar = () => {
                 {strings.navButton1}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink2}
                 onClick={()=>{
                   onclick!=1 && setonclick(1);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -190,9 +208,10 @@ const LeftBar = () => {
                 {strings.navButton2}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink5}
                 onClick={()=>{
                   onclick!=2 && setonclick(2);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -206,9 +225,10 @@ const LeftBar = () => {
                 {strings.navButton3}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink8}
                 onClick={()=>{
                   onclick!=3 && setonclick(3);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -217,14 +237,15 @@ const LeftBar = () => {
                   style={onclick==3 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'more'}
+                  <NavIcons name={'people'}
                     color={onclick==3 ? colors.white : colors.primary}/></span>
-                {strings.navButton4}</Link>
+                {strings.navButton9}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink10}
                 onClick={()=>{
                   onclick!=4 && setonclick(4);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -233,14 +254,15 @@ const LeftBar = () => {
                   style={onclick==4 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'add-movie'}
+                  <NavIcons name={'more'}
                     color={onclick==4 ? colors.white : colors.primary}/></span>
-                {strings.navButton5}</Link>
+                {strings.navButton4}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink3}
                 onClick={()=>{
                   onclick!=5 && setonclick(5);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -249,14 +271,15 @@ const LeftBar = () => {
                   style={onclick==5 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'add-tv-show'}
+                  <NavIcons name={'add-movie'}
                     color={onclick==5 ? colors.white : colors.primary}/></span>
-                {strings.navButton6}</Link>
+                {strings.navButton5}</Link>
             </li>
             <li>
-              <Link className='flex items-center my-8 ' to="/"
+              <Link className='flex items-center my-8 ' to={strings.navLink6}
                 onClick={()=>{
                   onclick!=6 && setonclick(6);
+                  setclose(false);
                 }}>
                 <span
                   className={[' px-2  h-10  flex justify-end items-center ',
@@ -265,8 +288,25 @@ const LeftBar = () => {
                   style={onclick==6 ? {background: `linear-gradient(90deg, 
                 ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
                 >
-                  <NavIcons name={'setting'}
+                  <NavIcons name={'add-tv-show'}
                     color={onclick==6 ? colors.white : colors.primary}/></span>
+                {strings.navButton6}</Link>
+            </li>
+            <li>
+              <Link className='flex items-center my-8 ' to={strings.navLink11}
+                onClick={()=>{
+                  onclick!=7 && setonclick(7);
+                  setclose(false);
+                }}>
+                <span
+                  className={[' px-2  h-10  flex justify-end items-center ',
+              onclick==7 ? ' w-4/12 rounded-r-full mr-2 ':
+              ' w-3/12 ']}
+                  style={onclick==7 ? {background: `linear-gradient(90deg, 
+                ${colors.secondaryLight} 0%, ${colors.secondary} 100%)`} : {}}
+                >
+                  <NavIcons name={'setting'}
+                    color={onclick==7 ? colors.white : colors.primary}/></span>
                 {strings.navButton7}</Link>
             </li>
           </ul>

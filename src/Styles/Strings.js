@@ -7,7 +7,7 @@ export const strings = {
   navButton6: 'Add Tv Show',
   navButton7: 'Settings',
   navButton8: 'Logout',
-
+  navButton9: 'People',
   footerButton1: 'About TMDB',
   footerButton2: 'Contact Us',
   footerButton3: 'Support Forums',
@@ -23,4 +23,19 @@ export const strings = {
   footerButton13: 'Terms of Use',
   footerButton14: 'API Terms of Use',
   footerButton15: 'Privacy Policy',
+  navLink1: '/',
+  navLink2: '/movies',
+  navLink3: '/movies/addnew',
+  navLink4: '/movies/details',
+  navLink5: '/tv-shows',
+  navLink6: '/tv-shows/addnew',
+  navLink7: '/tv-shows/details',
+  navLink8: '/people',
+  navLink9: '/poeple/details',
+  navLink10: '/more',
+  navLink11: '/settings',
+  navLink12: '/login',
+  navLink13: '/signup',
+  navLink14: '/about',
+
 };

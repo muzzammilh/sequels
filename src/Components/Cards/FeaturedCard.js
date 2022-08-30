@@ -5,10 +5,11 @@ import {colors} from '../../theme/colors';
 const FeaturedCard = ({title, textColor, date, rate,
   description, image, width, height, backgroundColor, buttonLabel}) => {
   return (
-    <div className='max-w-screen-md w-full relative rounded-xl'
+    <div className='max-w-screen-md w-full relative rounded-xl py-1'
       style={{width, backgroundColor: backgroundColor || colors.primary}}>
-      <div className='flex h-52 m-4' style={{color: textColor || colors.white}}>
-        <div className='w-48 h-full bg-black rounded-2xl overflow-hidden
+      <div className='md:flex min-h-[13rem] m-4'
+        style={{color: textColor || colors.white}}>
+        <div className='w-full md:w-48 h-52 bg-black rounded-2xl overflow-hidden
            shadow-lg transition-shadow'
         style={{height}}>
           {image&&<img src={image}
