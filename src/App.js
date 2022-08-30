@@ -8,12 +8,12 @@ import PeopleDetails from './pages/people/details';
 import TvShows from './pages/tv-shows/details';
 import TvShowDetails from './pages/tv-shows';
 import AddMovie from './pages/movies/addNew';
-import AddTvShow from './pages/tv-shows/addNew';
-import Login from './pages/login';
-import SignUp from './pages/signUp';
-import More from './pages/more';
-import Settings from './pages/settings';
-import About from './pages/about';
+import AddTvShow from './pages/tv-shows/AddNew';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import More from './pages/More';
+import Settings from './pages/Settings';
+import About from './pages/About';
 import Footer from './Components/Footer';
 import NavBar from './Components/NavBars/NavBar';
 
