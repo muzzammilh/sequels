@@ -15,7 +15,7 @@ const OutlinedButton = ({color, onClick, label, disabled,
           height,
           width}}
         disabled={disabled} onClick={onClick}>
-        <div
+        <div className='font-semibold text-sm'
           style={{color: color || colors.primary,
             fontSize,
             fontStyle,
