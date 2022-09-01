@@ -2,13 +2,14 @@
 import React, {useState} from 'react';
 import TabBar from '../Components/NavBars/TabBar';
 import VerticalCard from '../Components/Cards/VerticalCard';
-import OutlinedButton from '../Components/Buttons/OulinedButton';
 import FeaturedCard from '../Components/Cards/FeaturedCard';
 import Spacer from '../Components/Basic/Spacer';
 import {colors} from '../theme/colors';
+import moment from 'moment';
 
 const Home = () => {
-  const [activeDate, setActiveDate] = useState(1);
+  const [activeDate, setActiveDate] = useState(0);
+  const [date, setDate] = useState(Date.now());
   return (
     <div>
       <div className='w-full md:w-4/6'>
@@ -31,7 +32,7 @@ const Home = () => {
               })}
             </div>
             <div className='h-full absolute md:w-5 right-0 top-0
-           bg-gradient-to-l from-white'/>
+           bg-gradient-to-l from-white/40'/>
           </div>
         </div>
         {/* ---------------------- */}
@@ -39,7 +40,13 @@ const Home = () => {
         <div>
           <div className='w-full flex items-center justify-between pb-8'>
             <h1 className='text-xl font-bold'>Movies By Date</h1>
-            <OutlinedButton label='Aug 10, 2022'/>
+            <input className='min-w-min w-auto text-center
+              border rounded-full py-3 px-4 text-sm font-semibold
+              focus:outline-none focus:shadow-outline'
+            type={'date'}
+            value={moment(date).format('YYYY-MM-DD')}
+            onChange={(e) => setDate(e.target.value)}
+            style={{borderColor: colors.primary}}/>
           </div>
           <div className='flex justify-between font-bold text-sm pb-4
           overflow-x-auto hide-scrollbar'>
@@ -59,7 +66,8 @@ const Home = () => {
                     <Spacer height='0.6rem'/>}
                     <span style={{color: activeDate==index ?
                       colors.primaryLight : colors.primary}}>
-                      {12+index%30}</span>
+                      {moment(date).date()+index % moment(date).daysInMonth()}
+                    </span>
                   </button>;
                 })}
           </div>
