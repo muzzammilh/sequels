@@ -1,14 +1,15 @@
 import React from 'react';
 import {Icon} from '../../Styles/icons';
+import {Link} from 'react-router-dom';
 
-const VerticalCard = ({title, date, rate, image, width, height}) => {
+const VerticalCard = ({title, date, rate, image, width, height, to}) => {
   return (
     <div className='w-40' style={{width}}>
       <div className='w-full h-52 rounded-2xl overflow-hidden
       bg-purple-500 shadow-lg transition-shadow'
       style={{height}}>
-        {image&&<img src={image}
-          alt={title} className='w-full h-full object-cover'/>}
+        <Link to={to || '/'}>{image&&<img src={image}
+          alt={title} className='w-full h-full object-cover'/>}</Link>
       </div>
       <div>
         <div className='pt-2'>

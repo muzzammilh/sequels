@@ -10,7 +10,8 @@ import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 import {getallmovies} from '../Redux/Actions/movies';
 import soundWaves from '../Images/sound-waves.svg';
-
+import PercentageBar from '../Components/Basic/PercentageBar';
+import {strings} from '../Styles/Strings';
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
@@ -41,7 +42,8 @@ const Home = () => {
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
-                  <VerticalCard title={item.name} image={item.image}
+                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
+                    title={item.name} image={item.image}
                     date={item.date}/>
                 </div>;
               })}
@@ -97,7 +99,8 @@ const Home = () => {
               <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
                 {allmovies?.map((item, index) => {
                   return <div className='pr-6' key={index}>
-                    <VerticalCard title={item.name} image={item.image}
+                    <VerticalCard to={strings.navLink4 + '?id=' + item.id}
+                      title={item.name} image={item.image}
                       date={item.date}/>
                   </div>;
                 })}
@@ -136,7 +139,8 @@ const Home = () => {
             relative z-10'>
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
-                  <VerticalCard title={item.name} image={item.image}
+                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
+                    title={item.name} image={item.image}
                     date={item.date}/>
                 </div>;
               })}
@@ -154,7 +158,7 @@ const Home = () => {
 
         <Spacer height='1.5rem'/>
 
-        {/* ----------- Movie Of the Day Section ----------- */}
+        {/* ----------- Latest Trailer Section ----------- */}
 
         <div className='mt-8 py-4 pl-4 relative rounded-md'
           style={{backgroundColor: colors.primary}}>
@@ -166,7 +170,8 @@ const Home = () => {
             relative z-10'>
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
-                  <HorizontalCard title={item.name} image={item.image}
+                  <HorizontalCard to={strings.navLink4 + '?id=' + item.id}
+                    title={item.name} image={item.image}
                     date={item.date} titleColor={colors.white}/>
                 </div>;
               })}
@@ -200,8 +205,8 @@ const Home = () => {
           </div>
           <div className='py-4 relative z-10'>
             <div className='z-10 relative'>
-              <div className='absolute h-9 w-48 bg-white/70 top-28 z-20
-            left-12 rounded-md'>
+              <div className='absolute h-9 w-48 bg-white/70
+            top-28 z-20 left-12 rounded-md'>
                 <div className='flex items-center h-full gap-2
                 overflow-x-scroll w-full px-2'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
@@ -223,27 +228,38 @@ const Home = () => {
 
         {/* ---------------------- */}
 
-        <Spacer height='1.5rem'/>
-
         {/* ------------ Middle Section ---------- */}
 
         <div>
           <div>
-            <h1 className='text-xl font-bold'>People</h1>
+            <h1 className='text-xl font-bold'>Leaderboard</h1>
           </div>
           <div>
             <div className='gap-4 flex flex-col mt-6'>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                 return <div className='flex'>
-                  <div className='rounded-full bg-gray-100 overflow-hidden
+                  <div>
+                    <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
-                    {/* <img className='h-6 w-6'/> */}
+                      {/* <img className='h-6 w-6'/> */}
+                    </div>
                   </div>
-                  <div className='px-3'>
+                  <div className='px-3 w-full'>
                     <label className='text-sm font-semibold'>
                         Name
                     </label>
-                    <p className='text-xs italic'>lorem ipsem </p>
+                    <div className='gap-2 flex flex-col'>
+                      <div className='w-full'>
+                        <PercentageBar percentage={(5000/7000)*100}
+                          value={'23,000'}/>
+                      </div>
+                      <div className='w-full'>
+                        <PercentageBar percentage={(230000/700000)*100}
+                          color1={colors.redSecondary}
+                          color2={colors.redPrimary}
+                          value={'230,000'}/>
+                      </div>
+                    </div>
                   </div>
                 </div>;
               })}
@@ -256,6 +272,7 @@ const Home = () => {
       </div>
 
       {/* ---------------------- */}
+      <Spacer height='1.5rem'/>
 
     </div>
   );
