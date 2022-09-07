@@ -1,12 +1,25 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {colors} from '../theme/colors';
 import Logo from '../Images/logo-2.svg';
 import {Link} from 'react-router-dom';
 import {strings} from '../Styles/Strings';
-const Footer = () => {
+const Footer = ({inViewPort}) => {
+  const myRef = useRef();
+  const myFunction = () => {
+    if (myRef.current?.getBoundingClientRect().top -
+    window?.innerHeight<=0) {
+      inViewPort(true);
+    } else {
+      inViewPort(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', myFunction);
+    return () => window.removeEventListener('scroll', myFunction);
+  }, []);
   return (
-    <div className='w-full flex justify-center items-center
-    float-bottom px-8 py-20'
+    <div ref={myRef} className='w-full flex justify-center items-center
+    float-bottom px-8 py-20 relative z-50'
     style={{backgroundColor: colors.primary, minHeight: '50vh'}}>
       <div className='grid grid-cols-2 md:grid-cols-5 gap-12'>
         <div className='flex flex-col justify-between gap-4
