@@ -6,6 +6,10 @@ export const colors = {
   black: '#000000',
   white: '#ffffff',
   gray: '#767676',
-  grayDark: '#ebebeb',
+  grayDark: '#D0D0D0',
   star: '#ffd700',
+  seagreenPrimay: '#20d5a9',
+  seagreenSecondary: '#bdfdcf',
+  redPrimary: '#d93b62',
+  redSecondary: '#fdc271',
 };

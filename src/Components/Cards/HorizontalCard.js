@@ -1,20 +1,21 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {Icon} from '../../Styles/icons';
+import {Link} from 'react-router-dom';
 
 
-const HorizontalCard = ({title, description, image, width, height, headIcon}) => {
+const HorizontalCard = ({title, description, image, width, height, headIcon, titleColor, to}) => {
   return (
     <div className='w-72' style={{width}}>
       <div className='w-full h-40 rounded-lg overflow-hidden bg-purple-500 shadow-lg transition-shadow'
         style={{height}}>
-        {image&&<img src={image}
-          alt={title} className='w-full h-full object-cover'/>}
+        <Link to={to || '/'}>{image&&<img src={image}
+          alt={title} className='w-full h-full object-cover'/>}</Link>
       </div>
       <div>
         <div className='flex justify-between items-center mt-4'>
-          <div className='text-2xl font-semibold'>
-            <h1>{title || 'Lorem ipsum'}</h1>
+          <div className='text-xl font-semibold'>
+            <h1 style={{color: titleColor}}>{title || 'Lorem ipsum'}</h1>
           </div>
           <div>
             <Icon name={headIcon || 'star'}/>
