@@ -7,7 +7,6 @@ import {colors} from '../../theme/colors';
 const NavBar = ({changePostion}) => {
   const [shadow, setshadow] = useState();
   const myFunction = () => {
-    console.log('window :>> ', window.scrollY);
     if (window.scrollY>0) {
       shadow!=true && setshadow(true);
     } else {

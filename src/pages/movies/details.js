@@ -6,7 +6,11 @@ const MoviesDetails = () => {
   return (
     <div>
       <Head/>
-      <Casts/>
+      <div className='grid grid-cols-4'>
+        <div className='col-span-3'>
+          <Casts/>
+        </div>
+      </div>
     </div>
   );
 };
