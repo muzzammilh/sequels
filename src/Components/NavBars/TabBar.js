@@ -5,7 +5,7 @@ const TabBar = ({className, tabList, onClick, fontSize}) => {
   const [activeTab, setActiveTab] = React.useState(0);
   return (
     <div>
-      <ul className='gap-10 flex'>
+      <ul className='gap-6 md:gap-10 flex'>
         {tabList?.map((tab, index) => {
           return (
             // eslint-disable-next-line react/jsx-key
