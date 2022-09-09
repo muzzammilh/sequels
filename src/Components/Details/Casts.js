@@ -1,31 +1,38 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {Icon} from '../../Styles/icons';
 import {colors} from '../../theme/colors';
 
 const Casts = () => {
   return (
-    <div className='my-8'>
-      <div>
-        <h2 className='font-semibold text-xl'>Top Billed Cast</h2>
+    <div className='my-4 w-full'>
+      <div className='w-full flex justify-between items-center'>
+        <h2 className='font-semibold text-2xl'>Top Billed Cast</h2>
+        <Link className='text-sm font-light' to='#'>
+          <div className='flex gap-2 items-center underline'
+            style={{color: colors.primary}}>
+          Full Cast & Crew <Icon name={'arrow-right'}/>
+          </div>
+        </Link>
       </div>
       <div className='relative'>
-        <div className='flex gap-4 overflow-x-scroll w-full'>
+        <div className='flex gap-4 overflow-x-auto w-full'>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => {
           // eslint-disable-next-line react/jsx-key
-            return <div className='py-6'>
+            return <Link to={'#'} className='py-6'>
               <div className='w-36 rounded-md overflow-hidden shadow-lg'>
                 <div className='h-44 bg-gray-200 overflow-hidden'>
                   <img src='https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3IQQB5SIMyF5d6Tu4pMKU2FQehP.jpg'
                     className='object-cover object-center'/>
                 </div>
-                <div className='p-2 text-sm'>
+                <div className='p-3 text-sm'>
                   <h4 className='font-semibold'>
               Douglas Booth
                   </h4>
-                  <span className='font-light'>Romeo Montague</span>
+                  <div className='font-light text-xs'>Romeo Montague</div>
                 </div>
               </div>
-            </div>;
+            </Link>;
           })}
           <div className='py-6'>
             <button

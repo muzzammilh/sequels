@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Vibrant from 'node-vibrant';
 import {colors} from '../../theme/colors';
 import {Link} from 'react-router-dom';
@@ -6,11 +6,7 @@ import CircleProgress from '../../Components/CircleProgress';
 import IconButton from '../../Components/Buttons/IconButton';
 import {DetailIcons} from '../../Styles/detailIcons';
 
-const Head = () => {
-  const [vibrant, setVibrant] = useState(null);
-  const myColor = (parseInt(vibrant?.replace('#', ''), 16) >
-  0xffffff / 2)? colors.primaryLight : colors.primary;
-
+const Head = ({vibrant, setVibrant, forgorundColor}) => {
   const submit = async (imgUrl) => {
     const image = new Image();
     image.crossOrigin = 'anonymous';
@@ -38,7 +34,7 @@ const Head = () => {
             ${vibrant} 0%, ${vibrant}D0 100%)`}}/>
         <div className='m-8 px-2 relative w-full md:flex items-center gap-3'>
           <div>
-            <div className='w-72 rounded-md overflow-hidden'>
+            <div className='w-72 2xl:w-80 rounded-md overflow-hidden'>
               <img src='https://flxt.tmsimg.com/assets/p10036528_p_v12_ag.jpg'
                 alt='poster'
                 className='w-full object-cover h-[50vh]'/>
@@ -61,25 +57,25 @@ const Head = () => {
             </div>
           </div>
           <div
-            style={{color: myColor}}>
+            style={{color: forgorundColor}}>
             <h1 className='text-3xl font-bold '>
                 Romeo & Juliet <span className='font-light'>(2013)</span>
             </h1>
             <div className='text-sm font-light flex items-center mt-1'>
               <span className='border opacity-60 px-1 mr-2'
-                style={{borderColor: myColor}}>
+                style={{borderColor: forgorundColor}}>
                   PG-13
               </span>
               <span>
                   10/07/2013 (US)
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
-                style={{backgroundColor: myColor}}> </div>
+                style={{backgroundColor: forgorundColor}}> </div>
               <span>
                 <Link to='/'>Drama</Link>, <Link to='/'>Romance</Link>
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
-                style={{backgroundColor: myColor}}> </div>
+                style={{backgroundColor: forgorundColor}}> </div>
               <span>
                   1h 58m
               </span>
@@ -113,7 +109,7 @@ const Head = () => {
               </div>
               <div className='flex justify-center items-center'>
                 <span className='px-1'>
-                  <DetailIcons name={'play'} color={myColor}/></span>
+                  <DetailIcons name={'play'} color={forgorundColor}/></span>
                 <a>Play Trailer</a>
               </div>
             </div>
@@ -184,7 +180,7 @@ const Head = () => {
           </div>
         </div>
         <div className='px-4 pb-4'
-          style={{color: myColor}}>
+          style={{color: forgorundColor}}>
           <h1 className='text-2xl font-bold '>
                 Romeo & Juliet <span className='font-light'>(2013)</span>
           </h1>
@@ -197,7 +193,7 @@ const Head = () => {
             </div>
             <div className='flex justify-center items-center border-l'>
               <span className='pr-2'>
-                <DetailIcons name={'play'} color={myColor}/></span>
+                <DetailIcons name={'play'} color={forgorundColor}/></span>
               <a>Play Trailer</a>
             </div>
             {/* <div className='px-2'>
@@ -225,19 +221,19 @@ const Head = () => {
             <div className='text-sm font-light flex items-center mt-1
             flex-wrap max-w-[16rem] mx-auto justify-center px-2'>
               <span className='border opacity-60 px-1 mr-2'
-                style={{borderColor: myColor}}>
+                style={{borderColor: forgorundColor}}>
                   PG-13
               </span>
               <span>
                   10/07/2013 (US)
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
-                style={{backgroundColor: myColor}}> </div>
+                style={{backgroundColor: forgorundColor}}> </div>
               <span>
                   1h 58m
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
-                style={{backgroundColor: myColor}}> </div>
+                style={{backgroundColor: forgorundColor}}> </div>
               <span>
                 <Link to='/'>Drama</Link>, <Link to='/'>Romance</Link>
               </span>
