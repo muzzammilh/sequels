@@ -12,7 +12,7 @@ const LeftBar = () => {
       {/* ------------ Desktop Left NavBar ------------ */}
 
       <div className='hidden absolute left-0 top-0 h-screen
-       w-1/5 items-center md:flex z-40'>
+       w-1/6 items-center md:flex z-40'>
         <div className='w-full'>
           <ul className='font-semibold text-sm'>
             <li>
