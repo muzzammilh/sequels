@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TvShowDetails = () => {
+const TvShows = () => {
   return (
     <div>
             Tv Show Details
@@ -8,4 +8,4 @@ const TvShowDetails = () => {
   );
 };
 
-export default TvShowDetails;
+export default TvShows;
