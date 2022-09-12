@@ -13,7 +13,7 @@ const TabBar = ({className, tabList, onClick, fontSize}) => {
               <button className={[' capitalize font-bold ',
                 className]}
               style={{color: activeTab==index ? colors.primary :
-                colors.grayDark, fontSize: fontSize || '0.8rem'}}
+                colors.grayDark, fontSize: fontSize}}
               onClick={() => {
                 activeTab!=index && setActiveTab(index);
                 onClick && onClick(index);
