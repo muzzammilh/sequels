@@ -6,7 +6,10 @@ import {colors} from '../../theme/colors';
 const TvShows = () => {
   return (
     <div>
-      <div className='my-4'>
+      <div>
+        <h1 className='text-xl font-bold'>TV Shows</h1>
+      </div>
+      <div className='mt-2'>
         <TabBar tabList={['Popular', 'Airing Today', 'On TV', 'Top Rated']}
           className={' text-sm md:text-base '}/>
       </div>
