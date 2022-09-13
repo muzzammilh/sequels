@@ -43,7 +43,7 @@ const Home = () => {
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
+                    title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
                     date={item.date}/>
                 </div>;
               })}
@@ -100,7 +100,7 @@ const Home = () => {
                 {allmovies?.map((item, index) => {
                   return <div className='pr-6' key={index}>
                     <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                      title={item.name} image={item.image}
+                      title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
                       date={item.date}/>
                   </div>;
                 })}
@@ -140,7 +140,7 @@ const Home = () => {
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
+                    title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
                     date={item.date}/>
                 </div>;
               })}
@@ -171,7 +171,7 @@ const Home = () => {
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <HorizontalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
+                    title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
                     date={item.date} titleColor={colors.white}/>
                 </div>;
               })}
@@ -211,15 +211,16 @@ const Home = () => {
                 overflow-x-scroll w-full px-2'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                     return <div>
-                      <div className='h-6 w-9 bg-blue-300'>
-                        <img/>
+                      <div className='h-6 w-9 bg-blue-300 overflow-hidden'>
+                        <img className='object-cover origin-center'
+                          src={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}/>
                       </div>
                     </div>;
                   })
                   }
                 </div>
               </div>
-              <HorizontalCard />
+              <HorizontalCard image={'https://api.lorem.space/image/movie?w=150&h=220'}/>
             </div>
             <div className='w-72 h-40 bg-gray-100 absolute
             top-0 mt-7 ml-3 rounded-md drop-shadow-lg'></div>
@@ -241,7 +242,8 @@ const Home = () => {
                   <div>
                     <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
-                      {/* <img className='h-6 w-6'/> */}
+                      <img className='object-cover origin-center'
+                        src={`https://api.lorem.space/image/face?w=150&h=220&${index}`}/>
                     </div>
                   </div>
                   <div className='px-3 w-full'>
