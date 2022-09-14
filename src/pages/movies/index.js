@@ -1,6 +1,8 @@
 import React from 'react';
 import TabBar from '../../Components/NavBars/TabBar';
 import VerticalCard from '../../Components/Cards/VerticalCard';
+import PlainButton from '../../Components/Buttons/PlainButton';
+import {colors} from '../../theme/colors';
 
 const Movies = () => {
   return (
@@ -8,18 +10,25 @@ const Movies = () => {
       <div>
         <h1 className='font-bold'>Movies</h1>
       </div>
-      <div>
-        <TabBar tabList={['Popular', 'Now Playing', 'Upcoming', 'Top Rated']} />
+      <div className='mt-2'>
+        <TabBar tabList={['Popular', 'Now Playing', 'Upcoming', 'Top Rated']}
+          className={' text-sm md:text-base '} />
       </div>
-      <div className='flex flex-wrap py-2 gap-2'>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
+      <div className='flex flex-wrap gap-x-2 gap-y-4 md:gap-6 pt-4
+        justify-around md:justify-start'>
+        {[...Array(20)].map((item, index) => {
           return <div key={item}>
-            <VerticalCard/>
+            <VerticalCard />
           </div>;
         })
         }
       </div>
-
+      <div className='my-10'>
+        <PlainButton label={'Load More'}
+          className={` w-full md:w-3/4 rounded-md text-lg font-bold flex 
+           justify-center items-center mx-auto py-2 px-4 `}
+          backgroundColor={colors.secondary} />
+      </div>
     </>
   );
 };
