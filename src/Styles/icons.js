@@ -55,6 +55,6 @@ export const Icon = ({name, height, color}) => {
       );
 
     default:
-      return;
+      return <></>;
   }
 };
