@@ -1,6 +1,7 @@
 import React from 'react';
 import {colors} from '../../theme/colors';
 import PlainButton from '../../Components/Buttons/PlainButton';
+import {Link} from 'react-router-dom';
 const People = () => {
   return (
     <div>
@@ -12,7 +13,7 @@ const People = () => {
         md:justify-start'>
           {[...Array(20)].map((item, index) => {
             return (
-              <div key={index} className='w-40'>
+              <Link to={'/people/details'} key={index} className='w-40'>
                 <div className='w-full h-52 rounded-md overflow-hidden'>
                   <img
                     key={index}
@@ -31,7 +32,7 @@ const People = () => {
                     'color': colors.gray}}>
                     The Birch Devil in Ohio American Vandal Chad</p>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>
