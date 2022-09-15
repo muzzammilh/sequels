@@ -195,6 +195,6 @@ export const Icon = ({name, height, color}) => {
       );
 
     default:
-      return <>No Icon</>;
+      return <></>;
   }
 };
