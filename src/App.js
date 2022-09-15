@@ -5,8 +5,8 @@ import Movies from './pages/movies/index';
 import MoviesDetails from './pages/movies/details';
 import People from './pages/people';
 import PeopleDetails from './pages/people/details';
-import TvShows from './pages/tv-shows/details';
-import TvShowDetails from './pages/tv-shows';
+import TvShows from './pages/tv-shows/index';
+import TvShowDetails from './pages/tv-shows/details';
 import AddMovie from './pages/movies/addNew';
 import AddTvShow from './pages/tv-shows/AddNew';
 import Login from './pages/Login';
@@ -22,7 +22,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <div className='w-full md:w-[80%] min-h-screen float-right
+        <div className='w-full md:w-5/6 min-h-screen float-right
          mt-32 md:mt-20 relative px-4'>
           <Switch>
             <Route path="/" exact>
