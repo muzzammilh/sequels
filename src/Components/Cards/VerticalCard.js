@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-key */
+/* eslint-disable max-len */
 import React from 'react';
 import {Icon} from '../../Styles/icons';
 import {Link} from 'react-router-dom';
