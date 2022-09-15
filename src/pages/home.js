@@ -44,7 +44,7 @@ const Home = () => {
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
+                    title={item.name} image={item.image}
                     date={item.date}/>
                 </div>;
               })}
@@ -101,7 +101,7 @@ const Home = () => {
                 {allmovies?.map((item, index) => {
                   return <div className='pr-6' key={index}>
                     <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                      title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
+                      title={item.name} image={item.image}
                       date={item.date}/>
                   </div>;
                 })}
@@ -141,7 +141,7 @@ const Home = () => {
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
+                    title={item.name} image={item.image}
                     date={item.date}/>
                 </div>;
               })}
@@ -172,7 +172,7 @@ const Home = () => {
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <HorizontalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}
+                    title={item.name} image={item.image}
                     date={item.date} titleColor={colors.white}/>
                 </div>;
               })}
@@ -214,7 +214,7 @@ const Home = () => {
                     return <div key={index}>
                       <div className='h-6 w-9 bg-blue-300 overflow-hidden'>
                         <img className='object-cover origin-center'
-                          src={`https://api.lorem.space/image/movie?w=150&h=220&${index}`}/>
+                          src={item.image}/>
                       </div>
                     </div>;
                   })
