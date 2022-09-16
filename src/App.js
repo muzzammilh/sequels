@@ -16,6 +16,7 @@ import Settings from './pages/Settings';
 import About from './pages/About';
 import Footer from './Components/Footer';
 import NavBar from './Components/NavBars/NavBar';
+import ScrollToTop from './Components/ScrollToTop';
 
 const App = () => {
   const [onfooter, setfooter] = useState(false);
@@ -24,50 +25,52 @@ const App = () => {
       <Router>
         <div className='w-full md:w-5/6 min-h-screen float-right
          mt-32 md:mt-20 relative px-4'>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/login" exact>
-              <Login />
-            </Route>
-            <Route path="/signup" exact>
-              <SignUp />
-            </Route>
-            <Route path="/more" exact>
-              <More />
-            </Route>
-            <Route path="/settings" exact>
-              <Settings />
-            </Route>
-            <Route path="/about" exact>
-              <About />
-            </Route>
-            <Route path="/movies" exact>
-              <Movies />
-            </Route>
-            <Route path="/movies/addnew" exact>
-              <AddMovie />
-            </Route>
-            <Route path="/movies/details">
-              <MoviesDetails />
-            </Route>
-            <Route path="/people" exact>
-              <People />
-            </Route>
-            <Route path="/people/details">
-              <PeopleDetails />
-            </Route>
-            <Route path="/tv-shows" exact>
-              <TvShows />
-            </Route>
-            <Route path="/tv-shows/addnew" exact>
-              <AddTvShow />
-            </Route>
-            <Route path="/tv-shows/details">
-              <TvShowDetails />
-            </Route>
-          </Switch>
+          <ScrollToTop>
+            <Switch>
+              <Route path="/" exact>
+                <Home />
+              </Route>
+              <Route path="/login" exact>
+                <Login />
+              </Route>
+              <Route path="/signup" exact>
+                <SignUp />
+              </Route>
+              <Route path="/more" exact>
+                <More />
+              </Route>
+              <Route path="/settings" exact>
+                <Settings />
+              </Route>
+              <Route path="/about" exact>
+                <About />
+              </Route>
+              <Route path="/movies" exact>
+                <Movies />
+              </Route>
+              <Route path="/movies/addnew" exact>
+                <AddMovie />
+              </Route>
+              <Route path="/movies/details">
+                <MoviesDetails />
+              </Route>
+              <Route path="/people" exact>
+                <People />
+              </Route>
+              <Route path="/people/details">
+                <PeopleDetails />
+              </Route>
+              <Route path="/tv-shows" exact>
+                <TvShows />
+              </Route>
+              <Route path="/tv-shows/addnew" exact>
+                <AddTvShow />
+              </Route>
+              <Route path="/tv-shows/details">
+                <TvShowDetails />
+              </Route>
+            </Switch>
+          </ScrollToTop>
         </div>
         <NavBar changePostion = {onfooter}/>
         <Footer inViewPort = {setfooter}/>

@@ -9,7 +9,7 @@ const TvShows = () => {
       <div>
         <h1 className='text-xl font-bold'>TV Shows</h1>
       </div>
-      <div className='mt-2'>
+      <div className='mt-4'>
         <TabBar tabList={['Popular', 'Airing Today', 'On TV', 'Top Rated']}
           className={' text-sm md:text-base '}/>
       </div>

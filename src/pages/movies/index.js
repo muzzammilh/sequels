@@ -8,9 +8,9 @@ const Movies = () => {
   return (
     <>
       <div>
-        <h1 className='font-bold'>Movies</h1>
+        <h1 className='text-xl font-bold'>Movies</h1>
       </div>
-      <div className='mt-2'>
+      <div className='mt-4'>
         <TabBar tabList={['Popular', 'Now Playing', 'Upcoming', 'Top Rated']}
           className={' text-sm md:text-base '} />
       </div>
