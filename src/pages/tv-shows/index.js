@@ -19,7 +19,9 @@ const TvShows = () => {
           {[...Array(20)].map((item, index) => {
             return (
               <div key={index}>
-                <VerticalCard/>
+                <VerticalCard
+                to={`/tv-shows/details?id=${index}`}
+                image={`${process.env.REACT_APP_MOVE_LINK}&tv=${index}`}/>
               </div>
             );
           })}

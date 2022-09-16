@@ -11,10 +11,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getallmovies} from '../Redux/Actions/movies';
 import soundWaves from '../Images/sound-waves.svg';
 import PercentageBar from '../Components/Basic/PercentageBar';
-import {strings} from '../Styles/Strings';
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
+  const [activeTrailer, setActiveTrailer] = useState(0);
   const {allmovies} = useSelector((state) => state.movies);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,8 +43,9 @@ const Home = () => {
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
-                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
+                  <VerticalCard to={'/movies/details' + '?id=' + item.id}
+                    title={item.name}
+                    image={`${process.env.REACT_APP_MOVE_LINK}&pop=${item.id}`}
                     date={item.date}/>
                 </div>;
               })}
@@ -100,8 +101,9 @@ const Home = () => {
               <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
                 {allmovies?.map((item, index) => {
                   return <div className='pr-6' key={index}>
-                    <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                      title={item.name} image={item.image}
+                    <VerticalCard to={'/movies/details' + '?id=' + item.id}
+                      title={item.name}
+                    image={`${process.env.REACT_APP_MOVE_LINK}&mo=${item.id}`}
                       date={item.date}/>
                   </div>;
                 })}
@@ -123,7 +125,8 @@ const Home = () => {
             <h1 className='text-xl font-bold'>Movie of the Day</h1>
           </div>
           <div className='py-4'>
-            <FeaturedCard/>
+            <FeaturedCard
+            image={`${process.env.REACT_APP_MOVE_LINK}&day`}/>
           </div>
         </div>
 
@@ -140,8 +143,9 @@ const Home = () => {
             relative z-10'>
               {allmovies?.map((item, index) => {
                 return <div className='pr-6' key={index}>
-                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
+                  <VerticalCard to={'/movies/details' + '?id=' + item.id}
+                    title={item.name}
+                    image={`${process.env.REACT_APP_MOVE_LINK}&tren=${item.id}`}
                     date={item.date}/>
                 </div>;
               })}
@@ -163,25 +167,43 @@ const Home = () => {
 
         <div className='mt-8 py-4 pl-4 relative rounded-md'
           style={{backgroundColor: colors.primary}}>
-          <div>
+          <div className='relative z-10'>
             <h1 className='text-xl font-bold text-white'>Latest Trailers</h1>
           </div>
           <div className='relative py-4'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
             relative z-10'>
               {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
-                  <HorizontalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date} titleColor={colors.white}/>
+                return <div className='pr-6' key={index}
+                onMouseOver={()=>{
+                  activeTrailer?.index!= index && setActiveTrailer({
+                    index: index,
+                    src: `${process.env.REACT_APP_MOVE_LINK}&lat=${item.id}`,
+                  });
+                }}>
+                  <HorizontalCard to={'/movies/details' + '?id=' + item.id}
+                    className=' hover:scale-105 '
+                    title={item.name}
+                    image={`${process.env.REACT_APP_MOVE_LINK}&lat=${item.id}`}
+                    date={item.date} titleColor={colors.white}
+                    desColor={colors.primaryLight}/>
                 </div>;
               })}
             </div>
-            <div className='absolute w-full h-full left-0 top-0'
-              style={{backgroundColor: colors.primary}}>
-              <img className='cover'/>
-            </div>
           </div>
+          <div className='absolute w-full h-full left-0 top-0
+          overflow-hidden rounded-md'
+          style={{
+            backgroundImage: `url(${activeTrailer?.src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}>
+              <div className='w-full h-full'
+              style={{
+                backgroundColor: colors.primary,
+                opacity: 0.7,
+              }}/>
+            </div>
           <div className='h-full absolute md:w-5 right-0 top-0
            bg-gradient-to-l from-white z-10'/>
         </div>
@@ -209,18 +231,22 @@ const Home = () => {
               <div className='absolute h-9 w-48 bg-white/70
             top-28 z-20 left-12 rounded-md'>
                 <div className='flex items-center h-full gap-2
-                overflow-x-scroll w-full px-2'>
+                overflow-x-scroll w-full px-2 hide-scrollbar'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                     return <div>
-                      <div className='h-6 w-9 bg-blue-300'>
-                        <img/>
+                      <div className='h-6 w-9 bg-blue-300
+                      rounded-sm overflow-hidden'>
+                        <img
+                      src={`${process.env.REACT_APP_MOVE_LINK}&fam=${index}`}
+                        />
                       </div>
                     </div>;
                   })
                   }
                 </div>
               </div>
-              <HorizontalCard />
+              <HorizontalCard
+              image={`${process.env.REACT_APP_MOVE_LINK}&famus`}/>
             </div>
             <div className='w-72 h-40 bg-gray-100 absolute
             top-0 mt-7 ml-3 rounded-md drop-shadow-lg'></div>
@@ -242,7 +268,9 @@ const Home = () => {
                   <div>
                     <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
-                      {/* <img className='h-6 w-6'/> */}
+                      <img className='h-full w-full'
+                      // eslint-disable-next-line max-len
+                      src={`${process.env.REACT_APP_PERSON_LINK}&people=${index}`}/>
                     </div>
                   </div>
                   <div className='px-3 w-full'>
@@ -274,7 +302,6 @@ const Home = () => {
 
       {/* ---------------------- */}
       <Spacer height='1.5rem'/>
-
     </div>
   );
 };

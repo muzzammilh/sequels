@@ -16,9 +16,11 @@ const Movies = () => {
       </div>
       <div className='flex flex-wrap gap-x-2 gap-y-4 md:gap-6 pt-4
         justify-around md:justify-start'>
-        {[...Array(20)].map((item, index) => {
+        {[...Array(40)].map((item, index) => {
           return <div key={item}>
-            <VerticalCard />
+            <VerticalCard
+            to={`/movies/details?id=${index}`}
+            image={`${process.env.REACT_APP_MOVE_LINK}&movies=${index}`}/>
           </div>;
         })
         }
