@@ -29,10 +29,11 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
   return (
     <div className='relative'>
       <div
-        className={[`flex flex-col w-full px-4 md:px-8 
-        justify-center items-center `, className]}
-      style={{backgroundColor: backgroundColor}}>
-        <div className='w-full py-4 flex justify-between items-center'>
+        className={[`flex flex-col w-full 
+        justify-center items-center `, className]}>
+        <div className='w-full py-4 flex justify-between
+        items-center px-4 md:px-8'
+         style={{backgroundColor: backgroundColor}}>
 
           {/* ------------ Logo ------------ */}
 
@@ -101,42 +102,44 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
                 {onPClick==1&&<div
                 className="origin-top-right absolute right-0 mt-2
-                max-w-sm w-full  rounded-lg shadow-md mx-4
-                bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                max-w-sm mx-4"
                 role="menu" aria-orientation="vertical"
                 aria-labelledby="menu-button" tabIndex="-1">
-                    <div className="py-1 px-4 max-h-72 overflow-y-auto"
-                    role="none">
-                        {[1, 2, 3, 4, 5].map((item, index)=>{
-                            // eslint-disable-next-line react/jsx-key
-                            return <div
-                            className="text-gray-700 block py-2 text-sm
-                            border-b border-opacity-50">
-                                <div className='flex items-center
-                                justify-between'>
-                                  <h5 className='font-bold text-md'>
-                                    User Name</h5>
-                                  <span className='text-xs text-gray-500'>
-                                    6:30pm</span>
-                                </div>
-                                <p className='overflow-hidden overflow-ellipsis
-                                whitespace-normal'
-                                style={{'-webkit-box-orient': 'vertical',
-                                'display': '-webkit-box',
-                                '-webkit-line-clamp': '2'}}>
-                                {`Lorem Ipsum is simply dummy text of the
-                                printing and typesetting industry. Lorem
-                                Ipsum has been the industry's standard dummy
-                                text ever since the 1500s, when an unknown 
-                                printer took a galley of type and scrambled 
-                                it to make a type specimen book.`}</p>
-                            </div>;
-                        })}
-                    </div>
-                    <div
-                    className='flex justify-center w-full py-2 text-blue-600'>
-                        <a className='text-xs'>
-                            Clcik Here to Show More</a>
+                    <div className='bg-white w-full rounded-lg shadow-md
+                ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                      <div className="py-1 px-4 max-h-72 overflow-y-auto"
+                      role="none">
+                          {[1, 2, 3, 4, 5].map((item, index)=>{
+                              // eslint-disable-next-line react/jsx-key
+                              return <div
+                              className="text-gray-700 block py-2 text-sm
+                              border-b border-opacity-50">
+                                  <div className='flex items-center
+                                  justify-between'>
+                                    <h5 className='font-bold text-md'>
+                                      User Name</h5>
+                                    <span className='text-xs text-gray-500'>
+                                      6:30pm</span>
+                                  </div>
+                                  <p className='overflow-hidden
+                                  overflow-ellipsis whitespace-normal'
+                                  style={{'-webkit-box-orient': 'vertical',
+                                  'display': '-webkit-box',
+                                  '-webkit-line-clamp': '2'}}>
+                                  {`Lorem Ipsum is simply dummy text of the
+                                  printing and typesetting industry. Lorem
+                                  Ipsum has been the industry's standard dummy
+                                  text ever since the 1500s, when an unknown 
+                                  printer took a galley of type and scrambled 
+                                  it to make a type specimen book.`}</p>
+                              </div>;
+                          })}
+                      </div>
+                      <div
+                      className='flex justify-center w-full py-2 text-blue-600'>
+                          <a className='text-xs'>
+                              Clcik Here to Show More</a>
+                      </div>
                     </div>
                 </div>}
 
@@ -208,29 +211,32 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
         <motion.div variants={variants}
           animate={hidden ? 'hidden' : 'visible'}
-          className='flex gap-4 h-9 w-full mx-4 md:hidden mt-1 mb-4'>
-          <div className='rounded-full w-full flex
-            justify-center items-center px-3'
-          style={{backgroundColor: searchBgColor || colors.primaryLight}}>
-            <NavIcons name={'search'}/>
-            <div className='w-full'>
-              <input className='bg-transparent focus:border-transparent
-            hover:border-transparent focus-within:border-transparent
-            outline-none w-full px-2 placeholder-blue-900
-            placeholder-opacity-50'
-              placeholder='Search for Moviens / Tv Show'
-              onChange={onChangeSearch}/>
-            </div>
-          </div>
-          <div>
-            <button className='rounded-full w-9 h-9
-             flex justify-center items-center'
-            style={{backgroundColor: colors.primary}}>
-              <div className=' rotate-90 transform'>
-                <NavIcons name={'filter'} color={colors.primaryLight}
-                  height={'1rem'}/>
+          className='w-full -m-1'
+          style={{backgroundColor: backgroundColor}}>
+          <div className='flex gap-4 h-9 w-full mx-4 md:hidden mt-2 mb-4'>
+            <div className='rounded-full w-full flex
+              justify-center items-center px-3'
+            style={{backgroundColor: searchBgColor || colors.primaryLight}}>
+              <NavIcons name={'search'}/>
+              <div className='w-full'>
+                <input className='bg-transparent focus:border-transparent
+              hover:border-transparent focus-within:border-transparent
+              outline-none w-full px-2 placeholder-blue-900
+              placeholder-opacity-50'
+                placeholder='Search for Moviens / Tv Show'
+                onChange={onChangeSearch}/>
               </div>
-            </button>
+            </div>
+            <div>
+              <button className='rounded-full w-9 h-9
+              flex justify-center items-center'
+              style={{backgroundColor: colors.primary}}>
+                <div className=' rotate-90 transform'>
+                  <NavIcons name={'filter'} color={colors.primaryLight}
+                    height={'1rem'}/>
+                </div>
+              </button>
+            </div>
           </div>
         </motion.div>
 
