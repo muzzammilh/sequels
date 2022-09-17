@@ -28,7 +28,7 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
          relative justify-center items-center hidden md:flex'
       style={{
         backgroundImage:
-          `url(${process.env.REACT_APP_COVER_LINK}&movies=${random})`,
+          vibrant&&`url(${process.env.REACT_APP_COVER_LINK}&movies=${random})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>

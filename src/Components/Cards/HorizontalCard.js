@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 const HorizontalCard = ({title, description, image, width, height, headIcon, titleColor, to, desColor, className, rate}) => {
   return (
     <div className={[' w-72 rounded-md ', className]} style={{width}}>
-      <div className='w-full h-40 rounded-lg overflow-hidden bg-purple-500 shadow-lg transition-shadow'
+      <div className='w-full h-40 rounded-lg overflow-hidden bg-gray-200 shadow-lg transition-shadow'
         style={{height}}>
         <Link to={to || '/'}>{image&&<img src={image}
           alt={title} className='w-full h-full object-cover'/>}</Link>

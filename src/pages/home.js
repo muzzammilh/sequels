@@ -42,7 +42,7 @@ const Home = () => {
           <div className='relative'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
               {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
+                return <div className='pr-4' key={index}>
                   <VerticalCard to={'/movies/details' + '?id=' + item.id}
                     title={item.name}
                     image={`${process.env.REACT_APP_MOVE_LINK}&pop=${item.id}`}
@@ -100,7 +100,7 @@ const Home = () => {
             <div className='relative'>
               <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
                 {allmovies?.map((item, index) => {
-                  return <div className='pr-6' key={index}>
+                  return <div className='pr-4' key={index}>
                     <VerticalCard to={'/movies/details' + '?id=' + item.id}
                       title={item.name}
                     image={`${process.env.REACT_APP_MOVE_LINK}&mo=${item.id}`}
@@ -142,7 +142,7 @@ const Home = () => {
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
             relative z-10'>
               {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
+                return <div className='pr-4' key={index}>
                   <VerticalCard to={'/movies/details' + '?id=' + item.id}
                     title={item.name}
                     image={`${process.env.REACT_APP_MOVE_LINK}&tren=${item.id}`}
@@ -171,18 +171,21 @@ const Home = () => {
             <h1 className='text-xl font-bold text-white'>Latest Trailers</h1>
           </div>
           <div className='relative py-4'>
-            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
+            <div className='flex overflow-x-auto hide-scrollbar
             relative z-10'>
               {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}
+                return <div className='pr-2 scale-95 hover:scale-100'
+                key={index}
                 onMouseOver={()=>{
                   activeTrailer?.index!= index && setActiveTrailer({
                     index: index,
                     src: `${process.env.REACT_APP_MOVE_LINK}&lat=${item.id}`,
                   });
                 }}>
+                  <div className='h-10 w-10 absolute top-16 opacity-80
+                  left-0 right-0 mx-auto border-transparent border-t-[19px]
+                  border-l-[32px] border-l-white border-b-[19px] rounded-sm'/>
                   <HorizontalCard to={'/movies/details' + '?id=' + item.id}
-                    className=' hover:scale-105 '
                     title={item.name}
                     image={`${process.env.REACT_APP_MOVE_LINK}&lat=${item.id}`}
                     date={item.date} titleColor={colors.white}

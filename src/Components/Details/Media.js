@@ -18,7 +18,7 @@ const Media = () => {
             return <div>
               <div className='w-72 h-48 overflow-hidden rounded-md my-4'>
                 <img className='object-cover w-full h-full object-center'
-                src={`${process.env.REACT_APP_MOVE_LINK}&media=${index}`}/>
+                src={`${process.env.REACT_APP_COVER_LINK}&medi=${index}`}/>
               </div>
             </div>;
           })}

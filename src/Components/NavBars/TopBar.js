@@ -1,14 +1,35 @@
 /* eslint-disable indent */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import NavIcons from '../../Styles/NavIcons';
 import {colors} from '../../theme/colors';
+import {motion, useViewportScroll} from 'framer-motion';
 const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
   logoUrl, profileUrl, children, backgroundColor, className}) => {
    const [onPClick, setPClick] = useState(0);
+   const {scrollY} = useViewportScroll();
+    const [hidden, setHidden] = useState(false);
+    useEffect(() => {
+        return scrollY.onChange(() => update());
+      });
+      const update =() => {
+        if (scrollY?.current > 100 &&scrollY?.current > scrollY?.prev) {
+          hidden!=true&&setHidden(true);
+        } else if ( scrollY?.current < scrollY?.prev) {
+          hidden!=false&&setHidden(false);
+        }
+      };
+      const variants = {
+        visible: {opacity: 1, display: 'flex'},
+        hidden: {opacity: 0,
+          transitionEnd: {
+            display: 'none',
+          },
+      },
+      };
   return (
     <div className='relative'>
       <div
-        className={[`pb-4 md:pb-0 flex flex-col w-full px-4 md:px-8 
+        className={[`flex flex-col w-full px-4 md:px-8 
         justify-center items-center `, className]}
       style={{backgroundColor: backgroundColor}}>
         <div className='w-full py-4 flex justify-between items-center'>
@@ -80,7 +101,7 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
                 {onPClick==1&&<div
                 className="origin-top-right absolute right-0 mt-2
-                max-w-sm w-full  rounded-lg shadow-md
+                max-w-sm w-full  rounded-lg shadow-md mx-4
                 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical"
                 aria-labelledby="menu-button" tabIndex="-1">
@@ -143,7 +164,7 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
                 {onPClick==2&&<div
                 className="origin-top-right absolute right-0 mt-2
-                w-56 rounded-lg shadow-md bg-white ring-1
+                w-56 rounded-lg shadow-md bg-white ring-1 mx-4
                 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical"
                 aria-labelledby="menu-button" tabIndex="-1">
@@ -185,7 +206,9 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
         {/* ------------ Search Bar Mobile ------------ */}
 
-        <div className='flex gap-4 h-9 w-full mx-4 md:hidden mt-2'>
+        <motion.div variants={variants}
+          animate={hidden ? 'hidden' : 'visible'}
+          className='flex gap-4 h-9 w-full mx-4 md:hidden mt-1 mb-4'>
           <div className='rounded-full w-full flex
             justify-center items-center px-3'
           style={{backgroundColor: searchBgColor || colors.primaryLight}}>
@@ -209,7 +232,7 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
               </div>
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* ------------------------ */}
 

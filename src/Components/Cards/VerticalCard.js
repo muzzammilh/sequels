@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 
 const VerticalCard = ({title, date, rate, image, width, height, to}) => {
   return (
-    <div className='w-40' style={{width}}>
+    <div className='w-40 scale-95 hover:scale-100' style={{width}}>
       <div className='w-full h-52 rounded-2xl overflow-hidden
-      bg-purple-500 shadow-lg transition-shadow'
+      bg-gray-200 shadow-lg transition-shadow hover:shadow-2xl'
       style={{height}}>
         <Link to={to || '/'}>{image&&<img src={image}
           alt={title} className='w-full h-full object-cover'/>}</Link>
