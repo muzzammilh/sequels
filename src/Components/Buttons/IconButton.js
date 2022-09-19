@@ -18,7 +18,7 @@ const IconButton = ({color, onClick, icon, disabled,
             fontSize, fontStyle, fontWeight}}>
             {icon}
           </div>
-          <div className='pl-2' style={{color: color || colors.primary,
+          <div className={label&&'pl-2'} style={{color: color || colors.primary,
             fontSize, fontStyle, fontWeight}}>
             {label}
           </div>
