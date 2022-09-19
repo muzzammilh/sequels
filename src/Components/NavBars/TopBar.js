@@ -3,8 +3,10 @@ import React, {useState, useEffect} from 'react';
 import NavIcons from '../../Styles/NavIcons';
 import {colors} from '../../theme/colors';
 import {motion, useViewportScroll} from 'framer-motion';
+import PlainButton from '../Buttons/PlainButton';
 const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
-  logoUrl, profileUrl, children, backgroundColor, className}) => {
+  logoUrl, profileUrl, children, backgroundColor, className,
+  joinUsClick, loginSuccess, signOutClick}) => {
    const [onPClick, setPClick] = useState(0);
    const {scrollY} = useViewportScroll();
     const [hidden, setHidden] = useState(false);
@@ -78,7 +80,7 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
           {/* ----------------------- */}
 
-          <div className='flex gap-4 md:gap-8'>
+          {loginSuccess?<div className='flex gap-4 md:gap-8'>
             <div>
 
                 {/* ------------ Notifications Button ------------ */}
@@ -190,7 +192,8 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
                         className="text-gray-700 block w-full
                         text-left py-2 text-sm "
                         role="menuitem" tabIndex="-1"
-                        id="menu-item-3">
+                        id="menu-item-3"
+                        onClick={signOutClick}>
                             <div
                             className='border rounded-full h-10 flex
                             justify-center items-center'>
@@ -204,7 +207,10 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
                 {/* ----------------------- */}
 
             </div>
-          </div>
+          </div> :
+          <div>
+            <PlainButton label={'Join Us'} onClick={joinUsClick}/>
+          </div>}
         </div>
 
         {/* ------------ Search Bar Mobile ------------ */}
