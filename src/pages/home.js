@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-key */
+/* eslint-disable max-len */
 import React, {useEffect, useState} from 'react';
 import TabBar from '../Components/NavBars/TabBar';
 import VerticalCard from '../Components/Cards/VerticalCard';
@@ -75,7 +75,7 @@ const Home = () => {
           overflow-x-auto hide-scrollbar'>
             {['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Mo', 'Tu']
                 .map((item, index) => {
-                  return <button
+                  return <button key={index}
                     className={[' flex flex-col items-center px-4 py-4 ',
                   activeDate==index ? ' rounded-full ' : '']}
                     style={activeDate==index ?
@@ -211,16 +211,17 @@ const Home = () => {
                 <div className='flex items-center h-full gap-2
                 overflow-x-scroll w-full px-2'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-                    return <div>
-                      <div className='h-6 w-9 bg-blue-300'>
-                        <img/>
+                    return <div key={index}>
+                      <div className='h-6 w-9 bg-blue-300 overflow-hidden'>
+                        <img className='object-cover origin-center'
+                          src={item.image}/>
                       </div>
                     </div>;
                   })
                   }
                 </div>
               </div>
-              <HorizontalCard />
+              <HorizontalCard image={'https://api.lorem.space/image/movie?w=150&h=220'}/>
             </div>
             <div className='w-72 h-40 bg-gray-100 absolute
             top-0 mt-7 ml-3 rounded-md drop-shadow-lg'></div>
@@ -238,11 +239,12 @@ const Home = () => {
           <div>
             <div className='gap-4 flex flex-col mt-6'>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-                return <div className='flex'>
+                return <div className='flex' key={index}>
                   <div>
                     <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
-                      {/* <img className='h-6 w-6'/> */}
+                      <img className='object-cover origin-center'
+                        src={`https://api.lorem.space/image/face?w=150&h=220&${index}`}/>
                     </div>
                   </div>
                   <div className='px-3 w-full'>
