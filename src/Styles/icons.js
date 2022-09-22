@@ -63,6 +63,15 @@ export const Icon = ({name, height, color}) => {
               0 010-1.06z" clipRule="evenodd" />
         </svg>
       );
+    case 'arrow-left':
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" height={height || '1rem'} fill={color || colors.primary}>
+        <path fillRule="evenodd" d="M7.28 7.72a.75.75 0 010
+        1.06l-2.47 2.47H21a.75.75 0 010 1.5H4.81l2.47
+        2.47a.75.75 0 11-1.06 1.06l-3.75-3.75a.75.75
+        0 010-1.06l3.75-3.75a.75.75 0 011.06 0z" clipRule="evenodd" />
+      </svg>
+      );
     case 'facebook':
       return (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height={height || '1.8rem'} fill={color || colors.primary}>
@@ -193,7 +202,13 @@ export const Icon = ({name, height, color}) => {
           </g>
         </svg>
       );
+      case 'close':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" height={height || '1.5rem'} viewBox="0 0 24 24" strokeWidth={1.5} stroke={color || colors.primary}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
 
+        );
     default:
       return <></>;
   }
