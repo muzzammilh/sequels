@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-key */
+/* eslint-disable max-len */
 import React, {useEffect, useState} from 'react';
 import TabBar from '../Components/NavBars/TabBar';
 import VerticalCard from '../Components/Cards/VerticalCard';
@@ -76,7 +76,7 @@ const Home = () => {
           overflow-x-auto hide-scrollbar'>
             {['Mo', 'Tu', 'We', 'Th', 'Fr', 'St', 'Mo', 'Tu']
                 .map((item, index) => {
-                  return <button
+                  return <button key={index}
                     className={[' flex flex-col items-center px-4 py-4 ',
                   activeDate==index ? ' rounded-full ' : '']}
                     style={activeDate==index ?
@@ -236,7 +236,7 @@ const Home = () => {
                 <div className='flex items-center h-full gap-2
                 overflow-x-scroll w-full px-2 hide-scrollbar'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-                    return <div>
+                    return <div key={index}>
                       <div className='h-6 w-9 bg-blue-300
                       rounded-sm overflow-hidden'>
                         <img
@@ -267,7 +267,7 @@ const Home = () => {
           <div>
             <div className='gap-4 flex flex-col mt-6'>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
-                return <div className='flex'>
+                return <div className='flex' key={index}>
                   <div>
                     <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
