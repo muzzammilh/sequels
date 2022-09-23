@@ -16,6 +16,7 @@ import Settings from './pages/Settings';
 import About from './pages/About';
 import Footer from './Components/Footer';
 import NavBar from './Components/NavBars/NavBar';
+import OverlayVideo from './Components/Basic/OverlayVideo';
 
 const App = () => {
   const [onfooter, setfooter] = useState(false);
@@ -71,6 +72,7 @@ const App = () => {
         </div>
         <NavBar changePostion = {onfooter}/>
         <Footer inViewPort = {setfooter}/>
+        <OverlayVideo/>
       </Router>
     </>
   );

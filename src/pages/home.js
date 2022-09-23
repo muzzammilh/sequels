@@ -8,19 +8,62 @@ import Spacer from '../Components/Basic/Spacer';
 import {colors} from '../theme/colors';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
-import {getallmovies} from '../Redux/Actions/movies';
+import {getstreemingmovies, getforrentmovies, getontheatermovies, getmoviesbydate, getupcoming, getlatestmovie} from '../Redux/Actions/movies';
 import soundWaves from '../Images/sound-waves.svg';
 import PercentageBar from '../Components/Basic/PercentageBar';
 import {strings} from '../Styles/Strings';
+import {getstreemingTvShows} from '../Redux/Actions/tvShows';
+import {gettrendings} from '../Redux/Actions/trending';
+import {showOverlay} from '../Redux/Actions/overlay';
+
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
-  const {allmovies} = useSelector((state) => state.movies);
+  const {popularmovies, forrentmovies, ontheatermovies,
+    moviesbydate, upcomingmovies, latestmovie} = useSelector((state) => state.movies);
+  const {popularTvShows} = useSelector((state) => state.tvshows);
+  const {trendings} = useSelector((state) => state.trendings);
+  const [popularIndex, setpopularIndex] = useState(0);
+  const _popularData = {
+    0: popularmovies.results,
+    1: popularTvShows.results,
+    2: forrentmovies.results,
+    3: ontheatermovies.results,
+  };
   const dispatch = useDispatch();
+
+  // Whats popular data
   useEffect(() => {
-    dispatch(getallmovies());
-    window.scrollTo(0, 0);
+    console.log(popularIndex);
+    switch (popularIndex) {
+      case 0:
+        !popularmovies.results && dispatch(getstreemingmovies());
+        break;
+      case 1:
+        console.log('case 1');
+        !popularTvShows.results && dispatch(getstreemingTvShows());
+        break;
+      case 2:
+        !forrentmovies.results && dispatch(getforrentmovies());
+        break;
+      case 3:
+        !forrentmovies.results && dispatch(getontheatermovies());
+        break;
+      default:
+        break;
+    }
+  }, [popularIndex]);
+  // Movies by date
+  useEffect(() => {
+    dispatch(getmoviesbydate(date));
+  }, [activeDate]);
+  // Trending
+  useEffect(() => {
+    dispatch(gettrendings());
+    dispatch(getupcoming());
+    dispatch(getlatestmovie());
   }, []);
+
   return (
     <div className='inline md:flex'>
 
@@ -36,16 +79,16 @@ const Home = () => {
           </div>
           <div className='py-4'>
             <TabBar
-              tabList={['Streaming', 'ON Rent', 'For Rent', 'In Theaters']}
-              className=' text-xs md:text-sm '/>
+              tabList={['Streaming', 'ON TV', 'For Rent', 'In Theaters']}
+              className=' text-xs md:text-sm ' onClick={(v)=>setpopularIndex(v)}/>
           </div>
           <div className='relative'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
-              {allmovies?.map((item, index) => {
+              {_popularData[popularIndex]?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date}/>
+                    title={item.original_title} image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
+                    date={item.release_date} rate={(item.vote_average).toFixed(1)}/>
                 </div>;
               })}
             </div>
@@ -98,11 +141,12 @@ const Home = () => {
           <div className='py-4'>
             <div className='relative'>
               <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
-                {allmovies?.map((item, index) => {
+                {moviesbydate.results?.map((item, index) => {
                   return <div className='pr-6' key={index}>
                     <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                      title={item.name} image={item.image}
-                      date={item.date}/>
+                      title={item.original_title}
+                      image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
+                      date={item.release_date}/>
                   </div>;
                 })}
               </div>
@@ -116,14 +160,18 @@ const Home = () => {
 
         <Spacer height='1.5rem'/>
 
-        {/* ----------- Movie Of the Day Section ----------- */}
+        {/* ----------- Latest Movie Section ----------- */}
 
         <div>
           <div>
-            <h1 className='text-xl font-bold'>Movie of the Day</h1>
+            <h1 className='text-xl font-bold'>Latest Movie of the Day</h1>
           </div>
           <div className='py-4'>
-            <FeaturedCard/>
+            <FeaturedCard
+              title={latestmovie?.original_title}
+              description={latestmovie?.overview}
+              date={moment(latestmovie?.release_date).format('DD MMM, YYYY')}
+              image={latestmovie?.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + latestmovie.poster_path}/>
           </div>
         </div>
 
@@ -138,11 +186,12 @@ const Home = () => {
           <div className='relative py-4'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
             relative z-10'>
-              {allmovies?.map((item, index) => {
+              {trendings.results?.map((item, index) => {
                 return <div className='pr-6' key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date}/>
+                    title={item.original_title}
+                    image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
+                    date={item.release_date}/>
                 </div>;
               })}
             </div>
@@ -169,11 +218,13 @@ const Home = () => {
           <div className='relative py-4'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
             relative z-10'>
-              {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
-                  <HorizontalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date} titleColor={colors.white}/>
+              {upcomingmovies.results?.map((item, index) => {
+                return <div className='pr-6 cursor-pointer' key={index} onClick={()=>dispatch(showOverlay(item.id))}>
+                  <HorizontalCard
+                    title={item.original_title}
+                    image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/original' + item.backdrop_path}
+                    date={item.release_date} titleColor={colors.white}
+                    description={item.overview}/>
                 </div>;
               })}
             </div>

@@ -23,7 +23,11 @@ const HorizontalCard = ({title, description, image, width, height, headIcon, tit
           </div>
         </div>
         <div className='text-sm text-gray-400 pt-1'>
-          <p>
+          <p className='overflow-ellipsis
+          whitespace-normal overflow-hidden'
+          style={{'-webkit-box-orient': 'vertical',
+            'display': '-webkit-box',
+            '-webkit-line-clamp': '2'}}>
             {description || 'lorem ipsum dolor sit amet consectetur adipisicing elit.'}
           </p>
         </div>
