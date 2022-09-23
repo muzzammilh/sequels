@@ -16,9 +16,9 @@ const Media = () => {
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index)=>{
             // eslint-disable-next-line react/jsx-key
             return <div>
-              <div className='w-72 h-62 overflow-hidden rounded-md my-4'>
-                <img src='https://i.ytimg.com/vi/JSEK1NUPrGA/hqdefault.jpg'
-                  className='object-cover'/>
+              <div className='w-72 h-48 overflow-hidden rounded-md my-4'>
+                <img className='object-cover w-full h-full object-center'
+                src={`${process.env.REACT_APP_COVER_LINK}&medi=${index}`}/>
               </div>
             </div>;
           })}

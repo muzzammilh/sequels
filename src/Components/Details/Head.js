@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Vibrant from 'node-vibrant';
 import {colors} from '../../theme/colors';
 import {Link} from 'react-router-dom';
@@ -7,6 +7,7 @@ import IconButton from '../../Components/Buttons/IconButton';
 import {DetailIcons} from '../../Styles/detailIcons';
 
 const Head = ({vibrant, setVibrant, forgorundColor}) => {
+  const [random, setRandom] = useState();
   const submit = async (imgUrl) => {
     const image = new Image();
     image.crossOrigin = 'anonymous';
@@ -16,7 +17,8 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
     setVibrant(paletteData.Vibrant.hex);
   };
   useEffect(() => {
-    submit('https://flxt.tmsimg.com/assets/p10036528_p_v12_ag.jpg');
+    setRandom(Math.floor(Math.random() * 100));
+    submit(`${process.env.REACT_APP_COVER_LINK}&movies=${random}`);
   }, []);
   return (
     <div>
@@ -25,7 +27,8 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
       <div className='w-full min-h-[70vh] bg-gray-200 rounded-md
          relative justify-center items-center hidden md:flex'
       style={{
-        backgroundImage: 'url(https://www.themoviedb.org/t/p/w1000_and_h450_multi_faces/dlLxQN5tQupwwdJCLepD7yVvwMu.jpg)',
+        backgroundImage:
+          vibrant&&`url(${process.env.REACT_APP_COVER_LINK}&movies=${random})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>
@@ -35,7 +38,8 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
         <div className='m-8 px-2 relative w-full md:flex items-center gap-3'>
           <div>
             <div className='w-72 2xl:w-80 rounded-md overflow-hidden'>
-              <img src='https://flxt.tmsimg.com/assets/p10036528_p_v12_ag.jpg'
+              {/* eslint-disable-next-line max-len */}
+              <img src={`${process.env.REACT_APP_MOVE_LINK}&thumbnail=${random}`}
                 alt='poster'
                 className='w-full object-cover h-[50vh]'/>
               <div>
@@ -56,7 +60,7 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
               </div>
             </div>
           </div>
-          <div
+          <div className='px-4'
             style={{color: forgorundColor}}>
             <h1 className='text-3xl font-bold '>
                 Romeo & Juliet <span className='font-light'>(2013)</span>
@@ -159,9 +163,10 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
          relative flex flex-col md:hidden justify-center items-center
          overflow-hidden'
       style={{backgroundColor: vibrant}}>
-        <div className='relative w-full'
+        <div className='relative w-full bg-gray-200'
           style={{
-            backgroundImage: 'url(https://www.themoviedb.org/t/p/w1000_and_h450_multi_faces/dlLxQN5tQupwwdJCLepD7yVvwMu.jpg)',
+            backgroundImage:
+          vibrant&&`url(${process.env.REACT_APP_COVER_LINK}&movies=${random})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
           }}>
@@ -172,9 +177,10 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
             className='m-4 pr-2 relative w-full md:flex items-center gap-3'>
             <div>
               <div className='w-32 rounded-md overflow-hidden'>
-                <img src='https://flxt.tmsimg.com/assets/p10036528_p_v12_ag.jpg'
+                <img
+                  src={`${process.env.REACT_APP_MOVE_LINK}&thumbnail=${random}`}
                   alt='poster'
-                  className='w-full object-cover h-48'/>
+                  className='w-full object-cover h-48 bg-gray-400'/>
               </div>
             </div>
           </div>
@@ -196,7 +202,9 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
                 <DetailIcons name={'play'} color={forgorundColor}/></span>
               <a>Play Trailer</a>
             </div>
-            {/* <div className='px-2'>
+          </div>
+          <div className='flex justify-evenly pb-4'>
+              <div className='px-2'>
                 <IconButton icon={<DetailIcons name={'list'}
                   color={colors.primaryLight}/>}
                 backgroundColor={colors.primary}/>
@@ -215,7 +223,7 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
                 <IconButton icon={<DetailIcons name={'star'}
                   color={colors.primaryLight}/>}
                 backgroundColor={colors.primary}/>
-              </div> */}
+              </div>
           </div>
           <div className='py-6 bg-black/5'>
             <div className='text-sm font-light flex items-center mt-1

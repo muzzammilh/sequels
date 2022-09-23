@@ -19,6 +19,7 @@ import {showOverlay} from '../Redux/Actions/overlay';
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
+  const [activeTrailer, setActiveTrailer] = useState(0);
   const {popularmovies, forrentmovies, ontheatermovies,
     moviesbydate, upcomingmovies, latestmovie} = useSelector((state) => state.movies);
   const {popularTvShows} = useSelector((state) => state.tvshows);
@@ -34,7 +35,6 @@ const Home = () => {
 
   // Whats popular data
   useEffect(() => {
-    console.log(popularIndex);
     switch (popularIndex) {
       case 0:
         !popularmovies.results && dispatch(getstreemingmovies());
@@ -47,7 +47,7 @@ const Home = () => {
         !forrentmovies.results && dispatch(getforrentmovies());
         break;
       case 3:
-        !forrentmovies.results && dispatch(getontheatermovies());
+        !ontheatermovies.results && dispatch(getontheatermovies());
         break;
       default:
         break;
@@ -83,10 +83,10 @@ const Home = () => {
               className=' text-xs md:text-sm ' onClick={(v)=>setpopularIndex(v)}/>
           </div>
           <div className='relative'>
-            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
+            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar gap-2 md:gap-4'>
               {_popularData[popularIndex]?.map((item, index) => {
-                return <div className='pr-6' key={index}>
-                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
+                return <div key={index}>
+                  <VerticalCard to={popularIndex != 1 ? strings.navLink4 + '?id=' + item.id : strings.navLink5 + '?id=' + item.id}
                     title={item.original_title} image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
                     date={item.release_date} rate={(item.vote_average).toFixed(1)}/>
                 </div>;
@@ -140,9 +140,9 @@ const Home = () => {
           </div>
           <div className='py-4'>
             <div className='relative'>
-              <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
+              <div className='flex overflow-x-auto touch-pan-x hide-scrollbar gap-2 md:gap-4'>
                 {moviesbydate.results?.map((item, index) => {
-                  return <div className='pr-6' key={index}>
+                  return <div key={index}>
                     <VerticalCard to={strings.navLink4 + '?id=' + item.id}
                       title={item.original_title}
                       image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
@@ -185,9 +185,9 @@ const Home = () => {
           </div>
           <div className='relative py-4'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
-            relative z-10'>
+            relative z-10  gap-2 md:gap-4'>
               {trendings.results?.map((item, index) => {
-                return <div className='pr-6' key={index}>
+                return <div key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
                     title={item.original_title}
                     image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
@@ -212,27 +212,48 @@ const Home = () => {
 
         <div className='mt-8 py-4 pl-4 relative rounded-md'
           style={{backgroundColor: colors.primary}}>
-          <div>
+          <div className='relative z-10'>
             <h1 className='text-xl font-bold text-white'>Latest Trailers</h1>
           </div>
           <div className='relative py-4'>
-            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
+            <div className='flex overflow-x-auto hide-scrollbar
             relative z-10'>
               {upcomingmovies.results?.map((item, index) => {
-                return <div className='pr-6 cursor-pointer' key={index} onClick={()=>dispatch(showOverlay(item.id))}>
+                return <div className='pr-2 scale-95 hover:scale-100 cursor-pointer'
+                onClick={()=>dispatch(showOverlay(item.id))}
+                key={index}
+                onMouseOver={()=>{
+                  activeTrailer?.index!= index && setActiveTrailer({
+                    index: index,
+                    src: `${item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/original' + item.backdrop_path}`,
+                  });
+                }}>
+                  <div className='h-10 w-10 absolute top-16 opacity-80
+                  left-0 right-0 mx-auto border-transparent border-t-[19px]
+                  border-l-[32px] border-l-white border-b-[19px] rounded-sm'/>
                   <HorizontalCard
-                    title={item.original_title}
-                    image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/original' + item.backdrop_path}
-                    date={item.release_date} titleColor={colors.white}
-                    description={item.overview}/>
+                     title={item.original_title}
+                     image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/original' + item.backdrop_path}
+                     date={item.release_date} titleColor={colors.white}
+                     description={item.overview}
+                    desColor={colors.primaryLight}/>
                 </div>;
               })}
             </div>
-            <div className='absolute w-full h-full left-0 top-0'
-              style={{backgroundColor: colors.primary}}>
-              <img className='cover'/>
-            </div>
           </div>
+          <div className='absolute w-full h-full left-0 top-0
+          overflow-hidden rounded-md'
+          style={{
+            backgroundImage: `url(${activeTrailer?.src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}>
+              <div className='w-full h-full'
+              style={{
+                backgroundColor: colors.primary,
+                opacity: 0.7,
+              }}/>
+            </div>
           <div className='h-full absolute md:w-5 right-0 top-0
            bg-gradient-to-l from-white z-10'/>
         </div>
@@ -260,19 +281,22 @@ const Home = () => {
               <div className='absolute h-9 w-48 bg-white/70
             top-28 z-20 left-12 rounded-md'>
                 <div className='flex items-center h-full gap-2
-                overflow-x-scroll w-full px-2'>
+                overflow-x-scroll w-full px-2 hide-scrollbar'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                     return <div key={index}>
-                      <div className='h-6 w-9 bg-blue-300 overflow-hidden'>
-                        <img className='object-cover origin-center'
-                          src={item.image}/>
+                      <div className='h-6 w-9 bg-blue-300
+                      rounded-sm overflow-hidden'>
+                        <img
+                      src={`${process.env.REACT_APP_MOVE_LINK}&fam=${index}`}
+                        />
                       </div>
                     </div>;
                   })
                   }
                 </div>
               </div>
-              <HorizontalCard image={'https://api.lorem.space/image/movie?w=150&h=220'}/>
+              <HorizontalCard
+              image={`${process.env.REACT_APP_MOVE_LINK}&famus`}/>
             </div>
             <div className='w-72 h-40 bg-gray-100 absolute
             top-0 mt-7 ml-3 rounded-md drop-shadow-lg'></div>
@@ -294,8 +318,9 @@ const Home = () => {
                   <div>
                     <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
-                      <img className='object-cover origin-center'
-                        src={`https://api.lorem.space/image/face?w=150&h=220&${index}`}/>
+                      <img className='h-full w-full'
+                      // eslint-disable-next-line max-len
+                      src={`${process.env.REACT_APP_PERSON_LINK}&people=${index}`}/>
                     </div>
                   </div>
                   <div className='px-3 w-full'>
