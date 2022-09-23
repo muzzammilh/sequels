@@ -27,7 +27,8 @@ const ContentAndContributors = ({vibrant, forgroundColor}) => {
             'Jane Doe', 'John Doe'].map((item, index) => {
             return (<div key={index} className='flex items-center gap-2'>
               <div className='w-12 h-12 rounded-full overflow-hidden'>
-                <img src='https://www.themoviedb.org/t/p/w90_and_h90_face/yYG7Rhn9HfFpssIMeNiDynvxC14.jpg'/>
+                <img className = 'w-full h-full object-cover'
+                src={`${process.env.REACT_APP_MOVE_LINK}&con=${index}`}/>
               </div>
               <div>
                 <h1 className='font-semibold text-sm'>304</h1>

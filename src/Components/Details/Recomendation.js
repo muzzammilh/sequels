@@ -13,7 +13,8 @@ const Recomendation = () => {
             [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index)=>{
             // eslint-disable-next-line react/jsx-key
               return <div>
-                <HorizontalCard/>
+                <HorizontalCard
+                image={`${process.env.REACT_APP_COVER_LINK}&reco=${index}`}/>
               </div>;
             })
           }

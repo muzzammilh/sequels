@@ -8,19 +8,62 @@ import Spacer from '../Components/Basic/Spacer';
 import {colors} from '../theme/colors';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
-import {getallmovies} from '../Redux/Actions/movies';
+import {getstreemingmovies, getforrentmovies, getontheatermovies, getmoviesbydate, getupcoming, getlatestmovie} from '../Redux/Actions/movies';
 import soundWaves from '../Images/sound-waves.svg';
 import PercentageBar from '../Components/Basic/PercentageBar';
 import {strings} from '../Styles/Strings';
+import {getstreemingTvShows} from '../Redux/Actions/tvShows';
+import {gettrendings} from '../Redux/Actions/trending';
+import {showOverlay} from '../Redux/Actions/overlay';
+
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
-  const {allmovies} = useSelector((state) => state.movies);
+  const [activeTrailer, setActiveTrailer] = useState(0);
+  const {popularmovies, forrentmovies, ontheatermovies,
+    moviesbydate, upcomingmovies, latestmovie} = useSelector((state) => state.movies);
+  const {popularTvShows} = useSelector((state) => state.tvshows);
+  const {trendings} = useSelector((state) => state.trendings);
+  const [popularIndex, setpopularIndex] = useState(0);
+  const _popularData = {
+    0: popularmovies.results,
+    1: popularTvShows.results,
+    2: forrentmovies.results,
+    3: ontheatermovies.results,
+  };
   const dispatch = useDispatch();
+
+  // Whats popular data
   useEffect(() => {
-    dispatch(getallmovies());
-    window.scrollTo(0, 0);
+    switch (popularIndex) {
+      case 0:
+        !popularmovies.results && dispatch(getstreemingmovies());
+        break;
+      case 1:
+        console.log('case 1');
+        !popularTvShows.results && dispatch(getstreemingTvShows());
+        break;
+      case 2:
+        !forrentmovies.results && dispatch(getforrentmovies());
+        break;
+      case 3:
+        !ontheatermovies.results && dispatch(getontheatermovies());
+        break;
+      default:
+        break;
+    }
+  }, [popularIndex]);
+  // Movies by date
+  useEffect(() => {
+    dispatch(getmoviesbydate(date));
+  }, [activeDate]);
+  // Trending
+  useEffect(() => {
+    dispatch(gettrendings());
+    dispatch(getupcoming());
+    dispatch(getlatestmovie());
   }, []);
+
   return (
     <div className='inline md:flex'>
 
@@ -36,16 +79,16 @@ const Home = () => {
           </div>
           <div className='py-4'>
             <TabBar
-              tabList={['Streaming', 'ON Rent', 'For Rent', 'In Theaters']}
-              className=' text-xs md:text-sm '/>
+              tabList={['Streaming', 'ON TV', 'For Rent', 'In Theaters']}
+              className=' text-xs md:text-sm ' onClick={(v)=>setpopularIndex(v)}/>
           </div>
           <div className='relative'>
-            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
-              {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
-                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date}/>
+            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar gap-2 md:gap-4'>
+              {_popularData[popularIndex]?.map((item, index) => {
+                return <div key={index}>
+                  <VerticalCard to={popularIndex != 1 ? strings.navLink4 + '?id=' + item.id : strings.navLink5 + '?id=' + item.id}
+                    title={item.original_title} image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
+                    date={item.release_date} rate={(item.vote_average).toFixed(1)}/>
                 </div>;
               })}
             </div>
@@ -97,12 +140,13 @@ const Home = () => {
           </div>
           <div className='py-4'>
             <div className='relative'>
-              <div className='flex overflow-x-auto touch-pan-x hide-scrollbar'>
-                {allmovies?.map((item, index) => {
-                  return <div className='pr-6' key={index}>
+              <div className='flex overflow-x-auto touch-pan-x hide-scrollbar gap-2 md:gap-4'>
+                {moviesbydate.results?.map((item, index) => {
+                  return <div key={index}>
                     <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                      title={item.name} image={item.image}
-                      date={item.date}/>
+                      title={item.original_title}
+                      image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
+                      date={item.release_date}/>
                   </div>;
                 })}
               </div>
@@ -116,14 +160,18 @@ const Home = () => {
 
         <Spacer height='1.5rem'/>
 
-        {/* ----------- Movie Of the Day Section ----------- */}
+        {/* ----------- Latest Movie Section ----------- */}
 
         <div>
           <div>
-            <h1 className='text-xl font-bold'>Movie of the Day</h1>
+            <h1 className='text-xl font-bold'>Latest Movie of the Day</h1>
           </div>
           <div className='py-4'>
-            <FeaturedCard/>
+            <FeaturedCard
+              title={latestmovie?.original_title}
+              description={latestmovie?.overview}
+              date={moment(latestmovie?.release_date).format('DD MMM, YYYY')}
+              image={latestmovie?.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + latestmovie.poster_path}/>
           </div>
         </div>
 
@@ -137,12 +185,13 @@ const Home = () => {
           </div>
           <div className='relative py-4'>
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
-            relative z-10'>
-              {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
+            relative z-10  gap-2 md:gap-4'>
+              {trendings.results?.map((item, index) => {
+                return <div key={index}>
                   <VerticalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date}/>
+                    title={item.original_title}
+                    image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
+                    date={item.release_date}/>
                 </div>;
               })}
             </div>
@@ -163,25 +212,48 @@ const Home = () => {
 
         <div className='mt-8 py-4 pl-4 relative rounded-md'
           style={{backgroundColor: colors.primary}}>
-          <div>
+          <div className='relative z-10'>
             <h1 className='text-xl font-bold text-white'>Latest Trailers</h1>
           </div>
           <div className='relative py-4'>
-            <div className='flex overflow-x-auto touch-pan-x hide-scrollbar
+            <div className='flex overflow-x-auto hide-scrollbar
             relative z-10'>
-              {allmovies?.map((item, index) => {
-                return <div className='pr-6' key={index}>
-                  <HorizontalCard to={strings.navLink4 + '?id=' + item.id}
-                    title={item.name} image={item.image}
-                    date={item.date} titleColor={colors.white}/>
+              {upcomingmovies.results?.map((item, index) => {
+                return <div className='pr-2 scale-95 hover:scale-100 cursor-pointer'
+                onClick={()=>dispatch(showOverlay(item.id))}
+                key={index}
+                onMouseOver={()=>{
+                  activeTrailer?.index!= index && setActiveTrailer({
+                    index: index,
+                    src: `${item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/original' + item.backdrop_path}`,
+                  });
+                }}>
+                  <div className='h-10 w-10 absolute top-16 opacity-80
+                  left-0 right-0 mx-auto border-transparent border-t-[19px]
+                  border-l-[32px] border-l-white border-b-[19px] rounded-sm'/>
+                  <HorizontalCard
+                     title={item.original_title}
+                     image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/original' + item.backdrop_path}
+                     date={item.release_date} titleColor={colors.white}
+                     description={item.overview}
+                    desColor={colors.primaryLight}/>
                 </div>;
               })}
             </div>
-            <div className='absolute w-full h-full left-0 top-0'
-              style={{backgroundColor: colors.primary}}>
-              <img className='cover'/>
-            </div>
           </div>
+          <div className='absolute w-full h-full left-0 top-0
+          overflow-hidden rounded-md'
+          style={{
+            backgroundImage: `url(${activeTrailer?.src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}>
+              <div className='w-full h-full'
+              style={{
+                backgroundColor: colors.primary,
+                opacity: 0.7,
+              }}/>
+            </div>
           <div className='h-full absolute md:w-5 right-0 top-0
            bg-gradient-to-l from-white z-10'/>
         </div>
@@ -209,19 +281,22 @@ const Home = () => {
               <div className='absolute h-9 w-48 bg-white/70
             top-28 z-20 left-12 rounded-md'>
                 <div className='flex items-center h-full gap-2
-                overflow-x-scroll w-full px-2'>
+                overflow-x-scroll w-full px-2 hide-scrollbar'>
                   {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((item, index) => {
                     return <div key={index}>
-                      <div className='h-6 w-9 bg-blue-300 overflow-hidden'>
-                        <img className='object-cover origin-center'
-                          src={item.image}/>
+                      <div className='h-6 w-9 bg-blue-300
+                      rounded-sm overflow-hidden'>
+                        <img
+                      src={`${process.env.REACT_APP_MOVE_LINK}&fam=${index}`}
+                        />
                       </div>
                     </div>;
                   })
                   }
                 </div>
               </div>
-              <HorizontalCard image={'https://api.lorem.space/image/movie?w=150&h=220'}/>
+              <HorizontalCard
+              image={`${process.env.REACT_APP_MOVE_LINK}&famus`}/>
             </div>
             <div className='w-72 h-40 bg-gray-100 absolute
             top-0 mt-7 ml-3 rounded-md drop-shadow-lg'></div>
@@ -243,8 +318,9 @@ const Home = () => {
                   <div>
                     <div className='rounded-full bg-gray-100 overflow-hidden
                   h-14 w-14'>
-                      <img className='object-cover origin-center'
-                        src={`https://api.lorem.space/image/face?w=150&h=220&${index}`}/>
+                      <img className='h-full w-full'
+                      // eslint-disable-next-line max-len
+                      src={`${process.env.REACT_APP_PERSON_LINK}&people=${index}`}/>
                     </div>
                   </div>
                   <div className='px-3 w-full'>
