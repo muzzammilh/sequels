@@ -2,6 +2,7 @@
 import React from 'react';
 import {Icon} from '../../Styles/icons';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 
 const VerticalCard = ({title, date, rate, image, width, height, to}) => {
   return (
@@ -25,7 +26,7 @@ const VerticalCard = ({title, date, rate, image, width, height, to}) => {
           <div className='text-xs text-gray-400 px-1'>
             <span>
               {
-                date ||
+                moment(date).format('DD, MMM YYYY') ||
               '13, Jun 2022'
               }
             </span>

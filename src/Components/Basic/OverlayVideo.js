@@ -26,7 +26,7 @@ const OverlayVideo = () => {
     <motion.div variants={variants}
     initial="hidden"
     animate={overlay ? 'visible' : 'hidden'}
-    className={`fixed z-[100] w-screen h-screen bg-black/60 top-0 left-0 `}
+    className={`fixed z-[100] w-screen h-screen bg-black/80 top-0 left-0 `}
     onClick={()=>dispatch(hideOverlay())}>
       <div className='flex justify-center items-center h-full'>
         <iframe className='w-full h-[30vh] sm:h-[50vh]
