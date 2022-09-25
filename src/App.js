@@ -54,13 +54,13 @@ const App = () => {
                 <Route path="/movies/addnew" exact>
                   <AddMovie />
                 </Route>
-                <Route path="/movies/details">
+                <Route path="/movies/details/:id">
                   <MoviesDetails />
                 </Route>
                 <Route path="/people" exact>
                   <People />
                 </Route>
-                <Route path="/people/details">
+                <Route path="/people/details/:id">
                   <PeopleDetails />
                 </Route>
                 <Route path="/tv-shows" exact>
@@ -69,7 +69,7 @@ const App = () => {
                 <Route path="/tv-shows/addnew" exact>
                   <AddTvShow />
                 </Route>
-                <Route path="/tv-shows/details">
+                <Route path="/tv-shows/details/:id">
                   <TvShowDetails />
                 </Route>
               </Switch>

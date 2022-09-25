@@ -101,7 +101,7 @@ export const getmoviesbydate = (date) => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
-export const getupcoming = () => async (dispatch) => {
+export const getupcomingtrailers = () => async (dispatch) => {
   try {
     const response = await api.get('/movie/upcoming',
         {
@@ -111,7 +111,7 @@ export const getupcoming = () => async (dispatch) => {
         });
     if (response.data) {
       dispatch({
-        type: ActionType.GETUPCOMINGMOVIES,
+        type: ActionType.GETUPCOMINGTRAILERS,
         payload: response.data,
       });
     } else {
@@ -129,7 +129,6 @@ export const getlatestmovie = () => async (dispatch) => {
             'api_key': process.env.REACT_APP_TMDB_API_KEY,
           },
         });
-    console.log('response of Latest >> ', response);
     if (response.data) {
       dispatch({
         type: ActionType.GETLATESTMOVIE,
@@ -138,6 +137,98 @@ export const getlatestmovie = () => async (dispatch) => {
     } else {
       console.log('latestmovies Error >>', response);
     }
+  } catch (error) {
+    console.log('latestmovies Error >>', error);
+  }
+};
+export const getpopularmovie = (page) => async (dispatch) => {
+  try {
+    [...Array(2)].map(async (item, index) => {
+      const response = await api.get('/movie/popular',
+          {
+            params: {
+              api_key: process.env.REACT_APP_TMDB_API_KEY,
+              page: page + index + 1,
+            },
+          });
+      if (response.data) {
+        dispatch({
+          type: ActionType.GETPOPULARMOVIES,
+          payload: response.data,
+        });
+      } else {
+        console.log('latestmovies Error >>', response);
+      }
+  });
+  } catch (error) {
+    console.log('latestmovies Error >>', error);
+  }
+};
+export const getnowplayingmovies = (page) => async (dispatch) => {
+  try {
+    [...Array(2)].map(async (item, index) => {
+      const response = await api.get('/movie/now_playing',
+          {
+            params: {
+              api_key: process.env.REACT_APP_TMDB_API_KEY,
+              page: page + index + 1,
+            },
+          });
+      if (response.data) {
+        dispatch({
+          type: ActionType.GETNOWPLAYINGMOVIES,
+          payload: response.data,
+        });
+      } else {
+        console.log('latestmovies Error >>', response);
+      }
+  });
+  } catch (error) {
+    console.log('latestmovies Error >>', error);
+  }
+};
+export const getupcomingmovies = (page) => async (dispatch) => {
+  try {
+    [...Array(2)].map(async (item, index) => {
+      const response = await api.get('/movie/upcoming',
+          {
+            params: {
+              api_key: process.env.REACT_APP_TMDB_API_KEY,
+              page: page + index + 1,
+            },
+          });
+      if (response.data) {
+        dispatch({
+          type: ActionType.GETUPCOMINGMOVIES,
+          payload: response.data,
+        });
+      } else {
+        console.log('latestmovies Error >>', response);
+      }
+  });
+  } catch (error) {
+    console.log('latestmovies Error >>', error);
+  }
+};
+export const gettopratedmovies = (page) => async (dispatch) => {
+  try {
+    [...Array(2)].map(async (item, index) => {
+      const response = await api.get('/movie/top_rated',
+          {
+            params: {
+              api_key: process.env.REACT_APP_TMDB_API_KEY,
+              page: page + index + 1,
+            },
+          });
+      if (response.data) {
+        dispatch({
+          type: ActionType.GETTOPRATEDMOVIES,
+          payload: response.data,
+        });
+      } else {
+        console.log('latestmovies Error >>', response);
+      }
+  });
   } catch (error) {
     console.log('latestmovies Error >>', error);
   }

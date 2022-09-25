@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router';
 import Casts from '../../Components/Details/Casts';
 // eslint-disable-next-line max-len
 import ContentAndContributors from '../../Components/Details/ContentAndContributors';
@@ -14,6 +15,16 @@ const MoviesDetails = () => {
   const [vibrant, setVibrant] = useState(null);
   const forgorundColor = (parseInt(vibrant?.replace('#', ''), 16) >
   0xffffff / 2)? colors.primaryLight : colors.primary;
+  const {id} = useParams();
+
+  useEffect(() => {
+    console.log('router :>> ', id);
+
+    return function cleenup() {
+      console.log('cleenup :>> ');
+    };
+  }, []);
+
   return (
     <div>
       <Head vibrant={vibrant} setVibrant={setVibrant}

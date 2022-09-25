@@ -3,6 +3,30 @@ import {ActionType} from '../Contants/action-type';
 const inisialState = {
   allmovies: null,
   popularmovies: {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+  },
+  nowplayingmovies: {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+  },
+  upcomingmovies: {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+  },
+  topratedmovies: {
+    page: 0,
+    results: [],
+    total_pages: 0,
+    total_results: 0,
+  },
+  streamedmovies: {
     page: 1,
     results: null,
     total_pages: 0,
@@ -26,7 +50,7 @@ const inisialState = {
     total_pages: 0,
     total_results: 0,
   },
-  upcomingmovies: {
+  upcomingtrailers: {
     page: 1,
     results: null,
     total_pages: 0,
@@ -48,7 +72,7 @@ export const moviesReducer = (state = inisialState, action) => {
       };
     case ActionType.GETSTREEMINGMOVIES:
       return {
-        ...state, popularmovies: action.payload,
+        ...state, streamedmovies: action.payload,
       };
     case ActionType.GETFORRENTMOVIES:
       return {
@@ -59,19 +83,55 @@ export const moviesReducer = (state = inisialState, action) => {
         ...state, ontheatermovies: action.payload,
       };
     case ActionType.GETMOVIESBYDATE:
-      console.log('action.payload', action.payload);
       return {
         ...state, moviesbydate: action.payload,
       };
-    case ActionType.GETUPCOMINGMOVIES:
-      console.log('action.payload', action.payload);
+    case ActionType.GETUPCOMINGTRAILERS:
       return {
-        ...state, upcomingmovies: action.payload,
+        ...state, upcomingtrailers: action.payload,
       };
     case ActionType.GETLATESTMOVIE:
-      console.log('action.payload', action.payload);
       return {
         ...state, latestmovie: action.payload,
+      };
+    case ActionType.GETPOPULARMOVIES:
+      return {
+        ...state, popularmovies: {
+          page: action.payload.page,
+          results: [...state.popularmovies.results, ...action.payload.results],
+          total_pages: action.payload.total_pages,
+          total_results: action.payload.total_results,
+        },
+      };
+    case ActionType.GETNOWPLAYINGMOVIES:
+      return {
+        ...state, nowplayingmovies: {
+          page: action.payload.page,
+          results: [...state.nowplayingmovies.results,
+            ...action.payload.results],
+          total_pages: action.payload.total_pages,
+          total_results: action.payload.total_results,
+        },
+      };
+    case ActionType.GETUPCOMINGMOVIES:
+      return {
+        ...state, upcomingmovies: {
+          page: action.payload.page,
+          results: [...state.upcomingmovies.results,
+            ...action.payload.results],
+          total_pages: action.payload.total_pages,
+          total_results: action.payload.total_results,
+        },
+      };
+    case ActionType.GETTOPRATEDMOVIES:
+      return {
+        ...state, topratedmovies: {
+          page: action.payload.page,
+          results: [...state.topratedmovies.results,
+            ...action.payload.results],
+          total_pages: action.payload.total_pages,
+          total_results: action.payload.total_results,
+        },
       };
     default:
       return state;

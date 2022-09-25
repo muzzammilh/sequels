@@ -8,7 +8,7 @@ import Spacer from '../Components/Basic/Spacer';
 import {colors} from '../theme/colors';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
-import {getstreemingmovies, getforrentmovies, getontheatermovies, getmoviesbydate, getupcoming, getlatestmovie} from '../Redux/Actions/movies';
+import {getstreemingmovies, getforrentmovies, getontheatermovies, getmoviesbydate, getlatestmovie, getupcomingtrailers} from '../Redux/Actions/movies';
 import soundWaves from '../Images/sound-waves.svg';
 import PercentageBar from '../Components/Basic/PercentageBar';
 import {strings} from '../Styles/Strings';
@@ -21,14 +21,14 @@ const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
   const [activeTrailer, setActiveTrailer] = useState(0);
-  const {popularmovies, forrentmovies, ontheatermovies,
-    moviesbydate, upcomingmovies, latestmovie} = useSelector((state) => state.movies);
+  const {streamedmovies, forrentmovies, ontheatermovies,
+    moviesbydate, upcomingtrailers, latestmovie} = useSelector((state) => state.movies);
   const {popularTvShows} = useSelector((state) => state.tvshows);
   const {trendings} = useSelector((state) => state.trendings);
   const {popularPeople} = useSelector((state) => state.people);
   const [popularIndex, setpopularIndex] = useState(0);
   const _popularData = {
-    0: popularmovies.results,
+    0: streamedmovies.results,
     1: popularTvShows.results,
     2: forrentmovies.results,
     3: ontheatermovies.results,
@@ -39,7 +39,7 @@ const Home = () => {
   useEffect(() => {
     switch (popularIndex) {
       case 0:
-        !popularmovies.results && dispatch(getstreemingmovies());
+        !streamedmovies.results && dispatch(getstreemingmovies());
         break;
       case 1:
         console.log('case 1');
@@ -62,7 +62,7 @@ const Home = () => {
   // Trending
   useEffect(() => {
     dispatch(gettrendings());
-    dispatch(getupcoming());
+    dispatch(getupcomingtrailers());
     dispatch(getlatestmovie());
     dispatch(getpopularpeople());
   }, []);
@@ -89,7 +89,7 @@ const Home = () => {
             <div className='flex overflow-x-auto touch-pan-x hide-scrollbar gap-2 md:gap-4'>
               {_popularData[popularIndex]?.map((item, index) => {
                 return <div key={index}>
-                  <VerticalCard to={popularIndex != 1 ? strings.navLink4 + '?id=' + item.id : strings.navLink5 + '?id=' + item.id}
+                  <VerticalCard to={popularIndex != 1 ? strings.navLink4 + '/' + item.id : strings.navLink5 + '/' + item.id}
                     title={item.original_title || item.original_name} image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
                     date={item.release_date} rate={(item.vote_average).toFixed(1)}/>
                 </div>;
@@ -147,7 +147,7 @@ const Home = () => {
                   if (moment(item.release_date).format('YYYY-MM-DD') ==
                     moment(date).add(activeDate, 'days').format('YYYY-MM-DD')) {
                       return <div key={index}>
-                      <VerticalCard to={strings.navLink4 + '?id=' + item.id}
+                      <VerticalCard to={strings.navLink4 + '/' + item.id}
                         title={item.original_title}
                         image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
                         date={item.release_date}/>
@@ -193,7 +193,7 @@ const Home = () => {
             relative z-10  gap-2 md:gap-4'>
               {trendings.results?.map((item, index) => {
                 return <div key={index}>
-                  <VerticalCard to={strings.navLink4 + '?id=' + item.id}
+                  <VerticalCard to={strings.navLink4 + '/' + item.id}
                     title={item.original_title}
                     image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
                     date={item.release_date}/>
@@ -223,7 +223,7 @@ const Home = () => {
           <div className='relative py-4'>
             <div className='flex overflow-x-auto hide-scrollbar
             relative z-10'>
-              {upcomingmovies.results?.map((item, index) => {
+              {upcomingtrailers.results?.map((item, index) => {
                 return <div className='pr-2 scale-95 hover:scale-100 cursor-pointer'
                 onClick={()=>dispatch(showOverlay(item.id))}
                 key={index}
