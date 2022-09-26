@@ -40,7 +40,7 @@ const Movies = () => {
         {_moviesData[activeTab].results?.map((item, index) => {
           return <div key={item}>
             <VerticalCard
-            to={`/movies/details?id=${item.id}`}
+            to={`/movies/details/${item.id}`}
             title={item.original_title || item.original_name}
             image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL+
             '/w500' + item.poster_path}

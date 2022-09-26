@@ -63,9 +63,23 @@ const inisialState = {
     total_results: 0,
   },
   latestmovie: null,
+  moviedetails: null,
+  moviecredits: null,
 };
 export const moviesReducer = (state = inisialState, action) => {
   switch (action.type) {
+    case ActionType.GETMOVIEDETAILS:
+      return {
+        ...state, moviedetails: action.payload,
+      };
+    case ActionType.GETMOVIECREDITS:
+      return {
+        ...state, moviecredits: action.payload,
+      };
+    case ActionType.CLEARMOVIEDETAILS:
+      return {
+        ...state, moviedetails: null, moviecredits: null,
+      };
     case ActionType.GETALLMOVIES:
       return {
         ...state, allmovies: action.payload,

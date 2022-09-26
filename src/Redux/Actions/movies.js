@@ -233,3 +233,49 @@ export const gettopratedmovies = (page) => async (dispatch) => {
     console.log('latestmovies Error >>', error);
   }
 };
+export const getmoviedetails = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/movie/${id}`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    if (response.data) {
+      dispatch({
+        type: ActionType.GETMOVIEDETAILS,
+        payload: response.data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+export const getmoviecredits = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/movie/${id}/credits`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    if (response.data) {
+      dispatch({
+        type: ActionType.GETMOVIECREDITS,
+        payload: response.data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+export const clearmoviedetails = () => (dispatch) => {
+  dispatch({
+    type: ActionType.CLEARMOVIEDETAILS,
+  });
+};
+

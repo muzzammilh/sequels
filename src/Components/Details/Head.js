@@ -1,13 +1,27 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import Vibrant from 'node-vibrant';
 import {colors} from '../../theme/colors';
 import {Link} from 'react-router-dom';
 import CircleProgress from '../../Components/CircleProgress';
 import IconButton from '../../Components/Buttons/IconButton';
 import {DetailIcons} from '../../Styles/detailIcons';
+import moment from 'moment';
 
-const Head = ({vibrant, setVibrant, forgorundColor}) => {
-  const [random, setRandom] = useState();
+const Head = ({vibrant, setVibrant, forgorundColor, name, tagline,
+  releaseDate, overview, voteAverage, runtime, crew, genres, posterPath,
+  backdropPath, trailerClick}) => {
+  const crewMap = useMemo(() => {
+    const list = {};
+    crew?.map((item) => {
+      if (item.popularity > 2.5) {
+        list[item.id] = {
+          name: item.name,
+          job: [...(list[item.id]?.job || []), item.job],
+        };
+      }
+    });
+    return list;
+  }, [crew]);
   const submit = async (imgUrl) => {
     const image = new Image();
     image.crossOrigin = 'anonymous';
@@ -17,9 +31,10 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
     setVibrant(paletteData.Vibrant.hex);
   };
   useEffect(() => {
-    setRandom(Math.floor(Math.random() * 100));
-    submit(`${process.env.REACT_APP_COVER_LINK}&movies=${random}`);
-  }, []);
+    submit(process.env.REACT_APP_TMDB_IMAGE_URL +
+      '/original' + posterPath);
+  }, [posterPath]);
+
   return (
     <div>
       {/* ------------------Web View----------------------- */}
@@ -28,20 +43,25 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
          relative justify-center items-center hidden md:flex'
       style={{
         backgroundImage:
-          vibrant&&`url(${process.env.REACT_APP_COVER_LINK}&movies=${random})`,
+          vibrant&&
+          // eslint-disable-next-line max-len
+          `url(${process.env.REACT_APP_TMDB_IMAGE_URL}/original${backdropPath})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
       }}>
         <div className='w-full h-full absolute -z-10 rounded-md'
           style={{background: `linear-gradient(90deg,
             ${vibrant} 0%, ${vibrant}D0 100%)`}}/>
-        <div className='m-8 px-2 relative w-full md:flex items-center gap-3'>
+        <div className='m-8 px-2 relative w-full md:flex gap-3'>
           <div>
             <div className='w-72 2xl:w-80 rounded-md overflow-hidden'>
-              {/* eslint-disable-next-line max-len */}
-              <img src={`${process.env.REACT_APP_MOVE_LINK}&thumbnail=${random}`}
+              <div className='h-[50vh] w-full bg-gray-50 overflow-hidden'>
+              {posterPath&&
+                <img src={process.env.REACT_APP_TMDB_IMAGE_URL +
+                  '/w500' + posterPath}
                 alt='poster'
-                className='w-full object-cover h-[50vh]'/>
+                className='w-full object-cover'/>}
+              </div>
               <div>
                 <div className='flex justify-center items-center py-4'
                   style={{backgroundColor: colors.primary,
@@ -60,10 +80,13 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
               </div>
             </div>
           </div>
-          <div className='px-4'
+          <div className='px-4 w-full'
             style={{color: forgorundColor}}>
             <h1 className='text-3xl font-bold '>
-                Romeo & Juliet <span className='font-light'>(2013)</span>
+                {name}
+                <span className='font-light'>
+                  ({moment(releaseDate).year()})
+                </span>
             </h1>
             <div className='text-sm font-light flex items-center mt-1'>
               <span className='border opacity-60 px-1 mr-2'
@@ -71,22 +94,25 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
                   PG-13
               </span>
               <span>
-                  10/07/2013 (US)
+                  {moment(releaseDate).format('MM/DD/YYYY')} (US)
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
                 style={{backgroundColor: forgorundColor}}> </div>
               <span>
-                <Link to='/'>Drama</Link>, <Link to='/'>Romance</Link>
+                {genres?.map(({name, id}, index) =>
+                    <Link to='/' key={id}>{index!=0&&', '}{name}</Link>)}
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
                 style={{backgroundColor: forgorundColor}}> </div>
               <span>
-                  1h 58m
+                  {Math.floor(runtime/60)}h {''}
+                  {runtime%60}m
               </span>
             </div>
             <div className='pt-6 flex items-center'>
               <div>
-                <CircleProgress/>
+                <CircleProgress
+                  percentage={Math.floor(voteAverage*10)}/>
               </div>
               <span className='text-sm font-bold px-2'>
                   User <br/> Score
@@ -111,43 +137,30 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
                   color={colors.primaryLight}/>}
                 backgroundColor={colors.primary}/>
               </div>
-              <div className='flex justify-center items-center'>
+              <button className='flex justify-center items-center'
+              onClick={trailerClick}>
                 <span className='px-1'>
                   <DetailIcons name={'play'} color={forgorundColor}/></span>
-                <a>Play Trailer</a>
-              </div>
+                  Play Trailer
+              </button>
             </div>
             <div className='py-2'>
               <p className='font-light italic opacity-70'>
-                  The most dangerous love story ever told.</p>
+                  {tagline}</p>
             </div>
             <h1 className='text-xl font-semibold'>Overview</h1>
             <p className='text-sm font-light'>
-              In Verona, bad blood between the Montagueand Capulet families
-              leadsto much bitterness.Despite the hostility, Romeo Montague
-              manages an invitation to a masked ball at the estate of the
-              Capulets and meets Juliet, their daughter. The two are instantly
-              smitten but dismayed to learn that their families are enemies.
-              Romeo and Juliet figure out a way to pursue their romance,
-              but Romeo is banished for his part in the slaying of {'Juliet\'s'}
-              cousin, Tybalt.
+              {overview}
             </p>
             <div className='grid grid-cols-3 pt-8 gap-4'>
-              <div>
+              {Object.keys(crewMap).map((key, index) =>{
+                return <div key={key}>
                 <div className='font-bold text-sm'>
-                  <Link>Carlo Carlei</Link></div>
-                <div className='text-xs font-light'>Director</div>
-              </div>
-              <div>
-                <div className='font-bold text-sm'>
-                  <Link>Julian Fellowes</Link></div>
-                <div className='text-xs font-light'>Screenplay</div>
-              </div>
-              <div>
-                <div className='font-bold text-sm'>
-                  <Link>William Shakespeare</Link></div>
-                <div className='text-xs font-light'>Story</div>
-              </div>
+                  <Link>{crewMap[key].name}</Link></div>
+                <div className='text-xs font-light'>
+                  {(crewMap[key].job).join(', ')}</div>
+                </div>;
+              })}
             </div>
           </div>
 
@@ -166,7 +179,8 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
         <div className='relative w-full bg-gray-200'
           style={{
             backgroundImage:
-          vibrant&&`url(${process.env.REACT_APP_COVER_LINK}&movies=${random})`,
+            // eslint-disable-next-line max-len
+            vibrant&&`url(${process.env.REACT_APP_TMDB_IMAGE_URL}/original${backdropPath})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',
           }}>
@@ -176,11 +190,12 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
           <div
             className='m-4 pr-2 relative w-full md:flex items-center gap-3'>
             <div>
-              <div className='w-32 rounded-md overflow-hidden'>
-                <img
-                  src={`${process.env.REACT_APP_MOVE_LINK}&thumbnail=${random}`}
+              <div className='w-32 rounded-md overflow-hidden h-48'>
+              {posterPath&&<img
+                  src={process.env.REACT_APP_TMDB_IMAGE_URL +
+                    '/w500' + posterPath}
                   alt='poster'
-                  className='w-full object-cover h-48 bg-gray-400'/>
+                  className='w-full object-cover h-full bg-gray-400'/>}
               </div>
             </div>
           </div>
@@ -188,20 +203,23 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
         <div className='px-4 pb-4'
           style={{color: forgorundColor}}>
           <h1 className='text-2xl font-bold '>
-                Romeo & Juliet <span className='font-light'>(2013)</span>
+                {name} <span className='font-light'>
+                  ({moment(releaseDate).year()})</span>
           </h1>
           <div className='py-4 grid grid-cols-2 items-center'>
             <div className='flex justify-center items-center px-2'>
-              <CircleProgress radius={35}/>
+              <CircleProgress radius={35}
+                percentage={Math.floor(voteAverage*10)}/>
               <span className='text-sm font-bold px-2'>
                   User Score
               </span>
             </div>
-            <div className='flex justify-center items-center border-l'>
+            <button className='flex justify-center items-center border-l'
+            onClick={trailerClick}>
               <span className='pr-2'>
                 <DetailIcons name={'play'} color={forgorundColor}/></span>
               <a>Play Trailer</a>
-            </div>
+            </button>
           </div>
           <div className='flex justify-evenly pb-4'>
               <div className='px-2'>
@@ -233,51 +251,35 @@ const Head = ({vibrant, setVibrant, forgorundColor}) => {
                   PG-13
               </span>
               <span>
-                  10/07/2013 (US)
+                {moment(releaseDate).format('MM/DD/YYYY')} (US)
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
                 style={{backgroundColor: forgorundColor}}> </div>
               <span>
-                  1h 58m
+                {Math.floor(runtime/60)}h {''} {runtime%60}m
               </span>
               <div className='w-1 h-1 rounded-full mx-2'
                 style={{backgroundColor: forgorundColor}}> </div>
               <span>
-                <Link to='/'>Drama</Link>, <Link to='/'>Romance</Link>
+                {genres?.map(({name, id}, index) =>
+                    <Link to='/' key={id}>{index!=0&&', '}{name}</Link>)}
               </span>
             </div>
           </div>
           <div className='py-2'>
-            <p className='font-light italic opacity-70'>
-                  The most dangerous love story ever told.</p>
+            <p className='font-light italic opacity-70'>{tagline}</p>
           </div>
           <h1 className='text-xl font-semibold'>Overview</h1>
-          <p className='text-sm font-light'>
-              In Verona, bad blood between the Montagueand Capulet families
-              leadsto much bitterness.Despite the hostility, Romeo Montague
-              manages an invitation to a masked ball at the estate of the
-              Capulets and meets Juliet, their daughter. The two are instantly
-              smitten but dismayed to learn that their families are enemies.
-              Romeo and Juliet figure out a way to pursue their romance,
-              but Romeo is banished for his part in the slaying of {'Juliet\'s'}
-              cousin, Tybalt.
-          </p>
+          <p className='text-sm font-light'>{overview}</p>
           <div className='grid grid-cols-2 pt-8 gap-4'>
-            <div>
+            {Object.keys(crewMap).map((key, index) =>{
+              return <div key={key}>
               <div className='font-bold text-sm'>
-                <Link>Carlo Carlei</Link></div>
-              <div className='text-xs font-light'>Director</div>
-            </div>
-            <div>
-              <div className='font-bold text-sm'>
-                <Link>Julian Fellowes</Link></div>
-              <div className='text-xs font-light'>Screenplay</div>
-            </div>
-            <div>
-              <div className='font-bold text-sm'>
-                <Link>William Shakespeare</Link></div>
-              <div className='text-xs font-light'>Story</div>
-            </div>
+                <Link>{crewMap[key].name}</Link></div>
+              <div className='text-xs font-light'>
+                {(crewMap[key].job).join(', ')}</div>
+              </div>;
+            })}
           </div>
         </div>
       </div>

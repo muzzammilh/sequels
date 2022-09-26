@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {useParams} from 'react-router';
 import Casts from '../../Components/Details/Casts';
 // eslint-disable-next-line max-len
@@ -9,6 +10,9 @@ import Keywords from '../../Components/Details/Keywords';
 import Media from '../../Components/Details/Media';
 import Recomendation from '../../Components/Details/Recomendation';
 import Social from '../../Components/Details/Social';
+import {clearmoviedetails, getmoviecredits,
+  getmoviedetails} from '../../Redux/Actions/movies';
+import {showOverlay} from '../../Redux/Actions/overlay';
 import {colors} from '../../theme/colors';
 
 const MoviesDetails = () => {
@@ -16,19 +20,37 @@ const MoviesDetails = () => {
   const forgorundColor = (parseInt(vibrant?.replace('#', ''), 16) >
   0xffffff / 2)? colors.primaryLight : colors.primary;
   const {id} = useParams();
+  const {moviedetails, moviecredits} = useSelector((state) => state.movies);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log('router :>> ', id);
-
+  useLayoutEffect(() => {
+    dispatch(getmoviedetails(id));
+    dispatch(getmoviecredits(id));
     return function cleenup() {
-      console.log('cleenup :>> ');
+      dispatch(clearmoviedetails());
     };
   }, []);
 
   return (
     <div>
-      <Head vibrant={vibrant} setVibrant={setVibrant}
-        forgorundColor={forgorundColor}/>
+      <Head
+        vibrant={vibrant}
+        setVibrant={setVibrant}
+        forgorundColor={forgorundColor}
+        name={moviedetails?.original_title}
+        overview={moviedetails?.overview}
+        tagline={moviedetails?.tagline}
+        posterPath={moviedetails?.poster_path}
+        backdropPath={moviedetails?.backdrop_path}
+        releaseDate={moviedetails?.release_date}
+        voteAverage={moviedetails?.vote_average}
+        runtime={moviedetails?.runtime}
+        genres={moviedetails?.genres}
+        crew={moviecredits?.crew}
+        trailerClick={() => {
+          dispatch(showOverlay(id));
+        }}
+        />
       <div className='flex flex-wrap'>
         <div className='w-full md:w-4/6 mt-10 md:mb-10'>
           <Casts/>
