@@ -32,7 +32,10 @@ const Social = ({reviews}) => {
           whitespace-normal overflow-hidden'
           style={{'-webkit-box-orient': 'vertical',
             'display': '-webkit-box',
-            '-webkit-line-clamp': '3'}}>
+            '-webkit-line-clamp': '3',
+            'white-space': 'initial',
+            'word-wrap': 'break-word',
+            'hyphens': 'auto'}}>
             {item.content}
           </span>
           <button className='text-xs underline'>Read More</button>
