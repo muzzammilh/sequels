@@ -1,14 +1,8 @@
 import {ActionType} from '../Contants/action-type';
-import moviesData from '../../data/moviesData.json';
 import api from '../../Api/config';
 import moment from 'moment';
-export const getallmovies = () => (dispatch) => {
-  const data = moviesData;
-  dispatch({
-    type: ActionType.GETALLMOVIES,
-    payload: data,
-  });
-};
+
+// Get the Stream Movies from TMDB API
 export const getstreemingmovies = () => async (dispatch) => {
   try {
     const response = await api.get('/movie/popular',
@@ -30,6 +24,8 @@ export const getstreemingmovies = () => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
+
+// Get the For Rent Movie from TMDB API
 export const getforrentmovies = () => async (dispatch) => {
   try {
     const response = await api.get('/discover/movie',
@@ -55,6 +51,8 @@ export const getforrentmovies = () => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
+
+// Get the Ontheater Movie from TMDB API
 export const getontheatermovies = () => async (dispatch) => {
   try {
     const response = await api.get('/movie/now_playing',
@@ -75,6 +73,8 @@ export const getontheatermovies = () => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
+
+// Get the Movies by specific date from TMDB API
 export const getmoviesbydate = (date) => async (dispatch) => {
   try {
     const formatedDate = moment(date).format('YYYY-MM-DD');
@@ -101,6 +101,8 @@ export const getmoviesbydate = (date) => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
+
+// Get the Upcoming movie Trailers from TMDB API
 export const getupcomingtrailers = () => async (dispatch) => {
   try {
     const response = await api.get('/movie/upcoming',
@@ -121,6 +123,8 @@ export const getupcomingtrailers = () => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
+
+// Get the Latest Movie from TMDB API
 export const getlatestmovie = () => async (dispatch) => {
   try {
     const response = await api.get('/movie/latest',
@@ -141,6 +145,8 @@ export const getlatestmovie = () => async (dispatch) => {
     console.log('latestmovies Error >>', error);
   }
 };
+
+// Get the Popular Movies for Movies-Page from TMDB API
 export const getpopularmovie = (page) => async (dispatch) => {
   try {
     [...Array(2)].map(async (item, index) => {
@@ -164,6 +170,8 @@ export const getpopularmovie = (page) => async (dispatch) => {
     console.log('latestmovies Error >>', error);
   }
 };
+
+// Get the Now Playing Movies for Movies-Page from TMDB API
 export const getnowplayingmovies = (page) => async (dispatch) => {
   try {
     [...Array(2)].map(async (item, index) => {
@@ -187,6 +195,8 @@ export const getnowplayingmovies = (page) => async (dispatch) => {
     console.log('latestmovies Error >>', error);
   }
 };
+
+// Get the Upcoming Movies for Movies-Page from TMDB API
 export const getupcomingmovies = (page) => async (dispatch) => {
   try {
     [...Array(2)].map(async (item, index) => {
@@ -210,6 +220,8 @@ export const getupcomingmovies = (page) => async (dispatch) => {
     console.log('latestmovies Error >>', error);
   }
 };
+
+// Get the Top Rated Movies for Movies-Page from TMDB API
 export const gettopratedmovies = (page) => async (dispatch) => {
   try {
     [...Array(2)].map(async (item, index) => {
@@ -233,6 +245,8 @@ export const gettopratedmovies = (page) => async (dispatch) => {
     console.log('latestmovies Error >>', error);
   }
 };
+
+// Get the Movie Details from TMDB API
 export const getmoviedetails = (id) => async (dispatch) => {
   try {
     const response = await api.get(`/movie/${id}`,
@@ -253,6 +267,8 @@ export const getmoviedetails = (id) => async (dispatch) => {
     console.log('streammovies Error >>', error);
   }
 };
+
+// Get the Movie Credits from TMDB API
 export const getmoviecredits = (id) => async (dispatch) => {
   try {
     const response = await api.get(`/movie/${id}/credits`,
@@ -264,6 +280,128 @@ export const getmoviecredits = (id) => async (dispatch) => {
     if (response.data) {
       dispatch({
         type: ActionType.GETMOVIECREDITS,
+        payload: response.data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+
+// Get the Movie Reviews from TMDB API
+export const getmoviereviews = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/movie/${id}/reviews`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    if (response.data) {
+      dispatch({
+        type: ActionType.GETMOVIEREVIEWS,
+        payload: response.data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+
+// Get the Movie Keywords from TMDB API
+export const getmoviekeywords = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/movie/${id}/keywords`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    if (response.data) {
+      dispatch({
+        type: ActionType.GETMOVIEKEYWORDS,
+        payload: response.data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+
+// Get the Movie External Link (like facebook-page, insta extra) from TMDB API
+export const getexternallinks = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/movie/${id}/external_ids`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    if (response.data) {
+      dispatch({
+        type: ActionType.GETEXTERNALLINKS,
+        payload: response.data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+
+// Get the Movie Images & Videos from TMDB API
+export const getmovieimagesandviedos = (id) => async (dispatch) => {
+  try {
+    const images = api.get(`/movie/${id}/images`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    const videos = api.get(`/movie/${id}/videos`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    const response = await Promise.all([images, videos]);
+    if (response[0].data) {
+      dispatch({
+        type: ActionType.GETMOVIEIMAGES,
+        payload: response[0].data,
+      });
+    } if (response[1].data) {
+      dispatch({
+        type: ActionType.GETMOVIEVIDEOS,
+        payload: response[1].data,
+      });
+    } else {
+      console.log('streammovies Error >>', response);
+    }
+  } catch (error) {
+    console.log('streammovies Error >>', error);
+  }
+};
+
+// Get the Movie Recommendations from TMDB API
+export const getmovierecomendations = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/movie/${id}/recommendations`,
+        {
+          params: {
+            api_key: process.env.REACT_APP_TMDB_API_KEY,
+          },
+        });
+    if (response.data) {
+      dispatch({
+        type: ActionType.GETMOVIERECOMMENDATIONS,
         payload: response.data,
       });
     } else {

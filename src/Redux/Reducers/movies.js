@@ -1,7 +1,6 @@
 import {ActionType} from '../Contants/action-type';
 
 const inisialState = {
-  allmovies: null,
   popularmovies: {
     page: 0,
     results: [],
@@ -65,6 +64,13 @@ const inisialState = {
   latestmovie: null,
   moviedetails: null,
   moviecredits: null,
+  movievideos: null,
+  moviereviews: null,
+  movieexternalids: null,
+  moviekeywords: null,
+  movieimages: null,
+  movievideos: null,
+  movierecommendations: null,
 };
 export const moviesReducer = (state = inisialState, action) => {
   switch (action.type) {
@@ -76,13 +82,35 @@ export const moviesReducer = (state = inisialState, action) => {
       return {
         ...state, moviecredits: action.payload,
       };
+    case ActionType.GETMOVIEREVIEWS:
+      return {
+        ...state, moviereviews: action.payload,
+      };
+    case ActionType.GETMOVIEKEYWORDS:
+      return {
+        ...state, moviekeywords: action.payload,
+      };
+    case ActionType.GETEXTERNALLINKS:
+      return {
+        ...state, movieexternalids: action.payload,
+      };
+    case ActionType.GETMOVIEIMAGES:
+      return {
+        ...state, movieimages: action.payload,
+      };
+    case ActionType.GETMOVIEVIDEOS:
+      return {
+        ...state, movievideos: action.payload,
+      };
+    case ActionType.GETMOVIERECOMMENDATIONS:
+      return {
+        ...state, movierecommendations: action.payload,
+      };
     case ActionType.CLEARMOVIEDETAILS:
       return {
-        ...state, moviedetails: null, moviecredits: null,
-      };
-    case ActionType.GETALLMOVIES:
-      return {
-        ...state, allmovies: action.payload,
+        ...state, moviedetails: null, moviecredits: null, movievideos: null,
+        moviereviews: null, movieexternalids: null, moviekeywords: null,
+        movieimages: null, movievideos: null, movierecommendations: null,
       };
     case ActionType.GETSTREEMINGMOVIES:
       return {

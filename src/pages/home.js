@@ -193,8 +193,8 @@ const Home = () => {
             relative z-10  gap-2 md:gap-4'>
               {trendings.results?.map((item, index) => {
                 return <div key={index}>
-                  <VerticalCard to={strings.navLink4 + '/' + item.id}
-                    title={item.original_title}
+                  <VerticalCard to={`/${item.media_type == 'tv' ? 'tv-shows' : 'movies'}/details/${item.id}`}
+                    title={item.original_title || item.original_name}
                     image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL + '/w500' + item.poster_path}
                     date={item.release_date}/>
                 </div>;

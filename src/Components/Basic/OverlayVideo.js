@@ -5,7 +5,6 @@ import {motion} from 'framer-motion';
 
 const OverlayVideo = () => {
   const {overlay, url} = useSelector((state) => state.overlay);
-  console.log('OverlayVideo >>', overlay, url);
   const dispatch = useDispatch();
   const variants = {
     hidden: {
