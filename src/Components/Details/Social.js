@@ -16,29 +16,35 @@ const Social = ({reviews}) => {
         <div className='w-20 h-20 rounded-full bg-gray-200
         overflow-hidden'>
           {item?.author_details?.avatar_path&&
-            <img src={item.author_details.avatar_path.includes('http')?
+            <img className='w-full h-full object-cover'
+            src={item.author_details.avatar_path.includes('http')?
                item.author_details.avatar_path.slice(1) :
                (process.env.REACT_APP_TMDB_IMAGE_URL +
                '/w500' + item?.author_details.avatar_path)}/>}
         </div>
       </div>
-      <div className='px-6'>
+      <div className='px-4 md:px-6 overflow-hidden'>
         <h2 className='font-bold text-xl'>{item.author}</h2>
         <div className='font-light text-xs'
           style={{color: colors.gray}}>
             {moment(item.updated_at).format('MMMM D, YYYY')}</div>
-        <p className='pt-4 text-sm'>
-          <span className='font-light overflow-ellipsis
-          whitespace-normal overflow-hidden'
+        <p className='pt-4 text-sm overflow-hidden w-full'>
+          <span className='font-light
+          whitespace-normal overflow-hidden block'
           style={{'-webkit-box-orient': 'vertical',
             'display': '-webkit-box',
             '-webkit-line-clamp': '3',
-            'white-space': 'initial',
+            'text-overflow': 'ellipsis',
+            'white-space': 'nowrap',
+            'overflow': 'hidden',
             'word-wrap': 'break-word',
+            'overflow-wrap': 'word-wrap',
+            'white-space': 'pre-line',
             'hyphens': 'auto'}}>
             {item.content}
           </span>
-          <button className='text-xs underline'>Read More</button>
+          <button className='text-xs underline
+          whitespace-pre'>Read More</button>
         </p>
       </div>
     </div>;
