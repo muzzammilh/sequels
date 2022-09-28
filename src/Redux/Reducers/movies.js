@@ -43,12 +43,6 @@ const inisialState = {
     total_pages: 0,
     total_results: 0,
   },
-  topRatedmovies: {
-    page: 1,
-    results: null,
-    total_pages: 0,
-    total_results: 0,
-  },
   upcomingtrailers: {
     page: 1,
     results: null,

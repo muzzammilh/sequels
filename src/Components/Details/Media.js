@@ -28,7 +28,7 @@ const Media = ({posters, backdrops, videos}) => {
           className=' text-xs md:text-sm'/>
       </div>
       <div className='w-full relative'>
-        <div className='flex overflow-x-auto gap-2 h-48 my-4'>
+        <div className='flex overflow-x-auto gap-2 md:gap-3 h-48 my-4'>
           {tabsMap[tab].length!=0 ? tabsMap[tab].map((item)=>{
             return <div key={item.id} className='relative'>
               {item.file_path?

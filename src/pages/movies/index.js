@@ -41,7 +41,7 @@ const Movies = () => {
           return <div key={item}>
             <VerticalCard
             to={`/movies/details/${item.id}`}
-            title={item.original_title || item.original_name}
+            title={item.original_title}
             image={item.poster_path&&process.env.REACT_APP_TMDB_IMAGE_URL+
             '/w500' + item.poster_path}
             date={item.release_date} rate={(item.vote_average).toFixed(1)}/>

@@ -8,7 +8,7 @@ const Recomendation = ({data}) => {
         <h2 className='font-semibold text-2xl'>Recomendation</h2>
       </div>
       <div className='relative'>
-        <div className='flex gap-2 md:gap-4 py-4 overflow-x-auto'>
+        <div className='flex gap-2 md:gap-3 py-4 overflow-x-auto'>
           {
             data?.map((item, index)=>{
               return <div key={item.id}>
@@ -18,7 +18,7 @@ const Recomendation = ({data}) => {
                 image={item.backdrop_path &&
                   process.env.REACT_APP_TMDB_IMAGE_URL +
                   '/w500' + item.backdrop_path}
-                  title={item.original_title}
+                  title={item.original_title || item.original_name}
                   description={item.overview}
                   rate={(item.vote_average).toFixed(1)}/>
               </div>;
