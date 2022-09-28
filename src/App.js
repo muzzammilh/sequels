@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Home from './pages/home';
 import Movies from './pages/movies/index';
@@ -16,61 +16,69 @@ import Settings from './pages/Settings';
 import About from './pages/About';
 import Footer from './Components/Footer';
 import NavBar from './Components/NavBars/NavBar';
+import OverlayVideo from './Components/Basic/OverlayVideo';
+import ScrollToTop from './Components/ScrollToTop';
+import LeftBar from './Components/NavBars/LeftBar';
 
 const App = () => {
-  const [onfooter, setfooter] = useState(false);
   return (
     <>
       <Router>
-        <div className='w-full md:w-5/6 min-h-screen float-right
-         mt-32 md:mt-20 relative px-4'>
-          <Switch>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/login" exact>
-              <Login />
-            </Route>
-            <Route path="/signup" exact>
-              <SignUp />
-            </Route>
-            <Route path="/more" exact>
-              <More />
-            </Route>
-            <Route path="/settings" exact>
-              <Settings />
-            </Route>
-            <Route path="/about" exact>
-              <About />
-            </Route>
-            <Route path="/movies" exact>
-              <Movies />
-            </Route>
-            <Route path="/movies/addnew" exact>
-              <AddMovie />
-            </Route>
-            <Route path="/movies/details">
-              <MoviesDetails />
-            </Route>
-            <Route path="/people" exact>
-              <People />
-            </Route>
-            <Route path="/people/details">
-              <PeopleDetails />
-            </Route>
-            <Route path="/tv-shows" exact>
-              <TvShows />
-            </Route>
-            <Route path="/tv-shows/addnew" exact>
-              <AddTvShow />
-            </Route>
-            <Route path="/tv-shows/details">
-              <TvShowDetails />
-            </Route>
-          </Switch>
+        <div className='flex'>
+          <LeftBar/>
+          <div className='w-full md:w-5/6 min-h-screen float-right
+          mt-32 md:mt-24 relative px-4'>
+            <ScrollToTop>
+              <Switch>
+                <Route path="/" exact>
+                  <Home />
+                </Route>
+                <Route path="/login" exact>
+                  <Login />
+                </Route>
+                <Route path="/signup" exact>
+                  <SignUp />
+                </Route>
+                <Route path="/more" exact>
+                  <More />
+                </Route>
+                <Route path="/settings" exact>
+                  <Settings />
+                </Route>
+                <Route path="/about" exact>
+                  <About />
+                </Route>
+                <Route path="/movies" exact>
+                  <Movies />
+                </Route>
+                <Route path="/movies/addnew" exact>
+                  <AddMovie />
+                </Route>
+                <Route path="/movies/details/:id">
+                  <MoviesDetails />
+                </Route>
+                <Route path="/people" exact>
+                  <People />
+                </Route>
+                <Route path="/people/details/:id">
+                  <PeopleDetails />
+                </Route>
+                <Route path="/tv-shows" exact>
+                  <TvShows />
+                </Route>
+                <Route path="/tv-shows/addnew" exact>
+                  <AddTvShow />
+                </Route>
+                <Route path="/tv-shows/details/:id">
+                  <TvShowDetails />
+                </Route>
+              </Switch>
+            </ScrollToTop>
+          </div>
         </div>
-        <NavBar changePostion = {onfooter}/>
-        <Footer inViewPort = {setfooter}/>
+        <NavBar/>
+        <Footer/>
+        <OverlayVideo/>
       </Router>
     </>
   );
