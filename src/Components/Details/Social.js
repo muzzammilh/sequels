@@ -1,13 +1,13 @@
 import moment from 'moment';
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Icon} from '../../Styles/icons';
 import {colors} from '../../theme/colors';
 import TabBar from '../NavBars/TabBar';
 
 const Social = ({reviews}) => {
-  const [active, setActive] = React.useState(0);
-
+  const [active, setActive] = useState(0);
+  const [readMore, setReadMore] = useState();
   const reviewsSection = () => {
     return reviews?.map((item) => {
       return <div className='w-full p-4 my-4 flex border rounded-md'
@@ -31,20 +31,23 @@ const Social = ({reviews}) => {
         <p className='pt-4 text-sm overflow-hidden w-full'>
           <span className='font-light
           whitespace-normal overflow-hidden block'
-          style={{'-webkit-box-orient': 'vertical',
+          style={readMore == item.id?{
+           }:
+           {
+            '-webkit-box-orient': 'vertical',
             'display': '-webkit-box',
             '-webkit-line-clamp': '3',
-            'text-overflow': 'ellipsis',
             'white-space': 'nowrap',
-            'overflow': 'hidden',
             'word-wrap': 'break-word',
             'overflow-wrap': 'word-wrap',
             'white-space': 'pre-line',
-            'hyphens': 'auto'}}>
+            'hyphens': 'auto',
+            }}>
             {item.content}
           </span>
-          <button className='text-xs underline
-          whitespace-pre'>Read More</button>
+          <button onClick={()=>readMore?setReadMore(null):setReadMore(item.id)}
+          className='text-xs underline whitespace-pre'>
+            {readMore == item.id? 'Read less':'Read More'}</button>
         </p>
       </div>
     </div>;
