@@ -1,16 +1,19 @@
 import React from 'react';
 import {Icon} from '../../Styles/icons';
 
-const ExternalID = () => {
+const ExternalID = ({ids}) => {
   return (
     <div className='flex gap-4 items-center'>
       <div className='flex gap-4 items-center'>
-        <a href={`${process.env.REACT_APP_FACEBOOK_LINK}`}
-          target='_blank' rel="noreferrer"><Icon name={'facebook'}/></a>
-        <a href={`${process.env.REACT_APP_TWITTER_LINK}`}
-          target='_blank' rel="noreferrer"><Icon name={'twitter'}/></a>
-        <a href={`${process.env.REACT_APP_INSTAGRAM_LINK}`}
-          target='_blank' rel="noreferrer"><Icon name={'instagram'}/></a>
+        {ids?.facebook_id && <a
+        href={process.env.REACT_APP_FACEBOOK_LINK + ids.facebook_id}
+          target='_blank' rel="noreferrer"><Icon name={'facebook'}/></a>}
+        {ids?.twitter_id &&<a
+          href={process.env.REACT_APP_TWITTER_LINK + ids.twitter_id}
+          target='_blank' rel="noreferrer"><Icon name={'twitter'}/></a>}
+        {ids?.instagram_id &&<a
+          href={process.env.REACT_APP_INSTAGRAM_LINK + ids.instagram_id}
+          target='_blank' rel="noreferrer"><Icon name={'instagram'}/></a>}
       </div>
       <div className='flex gap-4 items-center'>
         <div className='border-l pl-4'>
