@@ -15,7 +15,7 @@ import {strings} from '../Styles/Strings';
 import {getstreemingTvShows} from '../Redux/Actions/tvShows';
 import {gettrendings} from '../Redux/Actions/trending';
 import {showOverlay} from '../Redux/Actions/overlay';
-import {getpopularpeople} from '../Redux/Actions/people';
+import {getpoppeople} from '../Redux/Actions/people';
 
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
@@ -64,7 +64,7 @@ const Home = () => {
     dispatch(gettrendings());
     dispatch(getupcomingtrailers());
     dispatch(getlatestmovie());
-    dispatch(getpopularpeople());
+    dispatch(getpoppeople());
   }, []);
 
   return (

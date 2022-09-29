@@ -51,7 +51,6 @@ const TvShowDetails = () => {
         backdropPath={tvShowDetails?.backdrop_path}
         releaseDate={tvShowDetails?.release_date}
         voteAverage={tvShowDetails?.vote_average}
-        runtime={tvShowDetails?.runtime}
         genres={tvShowDetails?.genres}
         crew={tvShowCredits?.crew}
         trailerClick={() => {
