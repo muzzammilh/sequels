@@ -1,9 +1,10 @@
 import React from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const IconButton = ({color, onClick, icon, disabled,
   backgroundColor, borderRadius, borderColor, label,
   className, fontSize, fontStyle, fontWeight, height, width}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div>
       <button>

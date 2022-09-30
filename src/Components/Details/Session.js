@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Icon} from '../../Styles/icons';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const Sessions = () => {
+  const {colors} = useSelector((state) => state.theme);
   const reviews = () => {
     return <div className='w-full h-48 my-4 flex border rounded-md shadow-md
     overflow-hidden'

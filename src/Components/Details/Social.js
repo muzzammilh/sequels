@@ -1,46 +1,58 @@
-import React from 'react';
+import moment from 'moment';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Icon} from '../../Styles/icons';
-import {colors} from '../../theme/colors';
 import TabBar from '../NavBars/TabBar';
+import {useSelector} from 'react-redux';
 
-const Social = () => {
-  const [active, setActive] = React.useState(0);
-
-  const reviews = () => {
-    return <div className='w-full p-4 my-4 flex border rounded-md'
-      style={{backgroundColor: colors.white}}>
+const Social = ({reviews}) => {
+  const {colors} = useSelector((state) => state.theme);
+  const [active, setActive] = useState(0);
+  const [readMore, setReadMore] = useState();
+  const reviewsSection = () => {
+    return reviews?.map((item) => {
+      return <div className='w-full p-4 my-4 flex border rounded-md'
+      style={{backgroundColor: colors.white}} key={item.id}>
       <div>
         <div className='w-20 h-20 rounded-full bg-gray-200
         overflow-hidden'>
-          <img src='https://www.themoviedb.org/t/p/w300_and_h300_face/6ZpVUJzqXMzH35VprEtnX0sNI3.jpg'/>
+          {item?.author_details?.avatar_path&&
+            <img className='w-full h-full object-cover'
+            src={item.author_details.avatar_path.includes('http')?
+               item.author_details.avatar_path.slice(1) :
+               (process.env.REACT_APP_TMDB_IMAGE_URL +
+               '/w500' + item?.author_details.avatar_path)}/>}
         </div>
       </div>
-      <div className='px-6'>
-        <h2 className='font-bold text-xl'>CinemaSerf</h2>
+      <div className='px-4 md:px-6 overflow-hidden'>
+        <h2 className='font-bold text-xl'>{item.author}</h2>
         <div className='font-light text-xs'
-          style={{color: colors.gray}}>June 6, 2022</div>
-        <p className='pt-4 text-sm'>
-          <span className='font-light overflow-ellipsis
-          whitespace-normal overflow-hidden'
-          style={{'-webkit-box-orient': 'vertical',
+          style={{color: colors.gray}}>
+            {moment(item.updated_at).format('MMMM D, YYYY')}</div>
+        <p className='pt-4 text-sm overflow-hidden w-full'>
+          <span className='font-light
+          whitespace-normal overflow-hidden block'
+          style={readMore == item.id?{
+           }:
+           {
+            '-webkit-box-orient': 'vertical',
             'display': '-webkit-box',
-            '-webkit-line-clamp': '3'}}>
-            {`What a superbly intricate piece of comedic cinema this is.
-          Keaton is adown-at-heel cinema projectionistwho fancies himself
-          as a budding "Sherlock Holmes". When a love-rival manages to
-          frame him for pinching his (rather fickle) girlfriend's father's
-          watch his life seems to have lost all purpose... Only when he
-          returns to his cinema and runs that evening's movie does he
-          doze off and dream his way into the film - this time as a
-          brilliant detective calmly dealing with poison, explosives
-          and dastardly cunning plots as he effortlessly solves
-          the crime - some stolen pearls - and gets the girl!`}
+            '-webkit-line-clamp': '3',
+            'white-space': 'nowrap',
+            'word-wrap': 'break-word',
+            'overflow-wrap': 'word-wrap',
+            'white-space': 'pre-line',
+            'hyphens': 'auto',
+            }}>
+            {item.content}
           </span>
-          <button className='text-xs underline'>Read More</button>
+          <button onClick={()=>readMore?setReadMore(null):setReadMore(item.id)}
+          className='text-xs underline whitespace-pre'>
+            {readMore == item.id? 'Read less':'Read More'}</button>
         </p>
       </div>
     </div>;
+    });
   };
 
   const discussions = () => {
@@ -91,7 +103,7 @@ const Social = () => {
       case 1:
         return discussions();
       default:
-        return reviews();
+        return reviewsSection();
     }
   };
 
@@ -102,7 +114,7 @@ const Social = () => {
         <Link className='text-sm font-light' to='#'>
           <div className='flex gap-2 items-center underline'
             style={{color: colors.primary}}>
-            {active==0? 'Read All Reviews' : 'Go to Discussions'}
+            {active==0? 'Read All reviews' : 'Go to Discussions'}
             <Icon name={'arrow-right'}/>
           </div>
         </Link>
