@@ -2,10 +2,11 @@ import React, {useMemo, useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {showOverlay} from '../../Redux/Actions/overlay';
 import {DetailIcons} from '../../Styles/detailIcons';
-import {colors} from '../../theme/colors';
 import TabBar from '../NavBars/TabBar';
+import {useSelector} from 'react-redux';
 
 const Media = ({posters, backdrops, videos}) => {
+  const {colors} = useSelector((state) => state.theme);
   const [tab, setTab] = useState(0);
   const dispatch = useDispatch();
   const popularMemo = useMemo(() => {
@@ -58,8 +59,11 @@ const Media = ({posters, backdrops, videos}) => {
           justify-center items-center text-xs font-light'
           style={{color: colors.gray}}>No data</div>}
         </div>
-        <div className='absolute h-full top-0 right-0 md:w-6
-        bg-gradient-to-l from-white'/>
+        <div className='absolute h-full top-0 right-0 md:w-6'
+        style={{
+          // eslint-disable-next-line max-len
+          background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+         }}/>
       </div>
     </div>
   );

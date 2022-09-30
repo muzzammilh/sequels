@@ -1,13 +1,14 @@
 /* eslint-disable indent */
 import React, {useState, useEffect} from 'react';
 import NavIcons from '../../Styles/NavIcons';
-import {colors} from '../../theme/colors';
 import {motion, useViewportScroll} from 'framer-motion';
+import {useSelector} from 'react-redux';
 const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
   logoUrl, profileUrl, children, backgroundColor, className}) => {
    const [onPClick, setPClick] = useState(0);
    const {scrollY} = useViewportScroll();
     const [hidden, setHidden] = useState(false);
+    const {colors} = useSelector((state) => state.theme);
     useEffect(() => {
         return scrollY.onChange(() => update());
       });
@@ -53,14 +54,17 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
             <div className='rounded-full w-full flex
               justify-center items-center px-3'
             style={{backgroundColor: searchBgColor || colors.primaryLight}}>
-              <NavIcons name={'search'}/>
+              <NavIcons name={'search'} color={colors.primary}/>
               <div className='w-full'>
                 <input className='bg-transparent focus:border-transparent
             hover:border-transparent focus-within:border-transparent
-            outline-none w-full px-2 placeholder-blue-900
+            outline-none w-full px-2 placeholder-blue-300
             placeholder-opacity-50'
                 placeholder='Search for Moviens / Tv Show'
-                onChange={onChangeSearch}/>
+                onChange={onChangeSearch}
+                style={{
+                  color: colors.primary,
+                }}/>
               </div>
             </div>
             <div>
@@ -93,7 +97,7 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
                     className='absolute w-2 h-2 rounded-full
                     bg-red-700 transform rotate-12 -translate-y-3
                     translate-x-3 origin-bottom'/>
-                <NavIcons name={'notification'}/>
+                <NavIcons name={'notification'} color={colors.primary}/>
                 </button>
 
                 {/* ----------------------- */}
@@ -102,23 +106,32 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
                 {onPClick==1&&<div
                 className="origin-top-right absolute right-0 mt-2
-                max-w-sm mx-4"
+                max-w-sm mx-4 z-30"
                 role="menu" aria-orientation="vertical"
                 aria-labelledby="menu-button" tabIndex="-1">
-                    <div className='bg-white w-full rounded-lg shadow-md
-                ring-1 ring-black ring-opacity-5 focus:outline-none'>
+                    <div className='w-full rounded-lg shadow-md
+                ring-1 ring-black ring-opacity-5 focus:outline-none'
+                style={{
+                  backgroundColor: colors.white,
+                }}>
                       <div className="py-1 px-4 max-h-72 overflow-y-auto"
                       role="none">
                           {[1, 2, 3, 4, 5].map((item, index)=>{
                               // eslint-disable-next-line react/jsx-key
                               return <div
-                              className="text-gray-700 block py-2 text-sm
-                              border-b border-opacity-50">
+                              className=" block py-2 text-sm
+                              border-b border-opacity-50"
+                              style={{
+                                color: colors.primary,
+                              }}>
                                   <div className='flex items-center
                                   justify-between'>
                                     <h5 className='font-bold text-md'>
                                       User Name</h5>
-                                    <span className='text-xs text-gray-500'>
+                                    <span className='text-xs '
+                                    style={{
+                                      color: colors.primaryLight,
+                                    }}>
                                       6:30pm</span>
                                   </div>
                                   <p className='overflow-hidden
@@ -167,27 +180,33 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
 
                 {onPClick==2&&<div
                 className="origin-top-right absolute right-0 mt-2
-                w-56 rounded-lg shadow-md bg-white ring-1 mx-4
+                w-56 rounded-lg shadow-md ring-1 mx-4 z-30
                 ring-black ring-opacity-5 focus:outline-none"
                 role="menu" aria-orientation="vertical"
-                aria-labelledby="menu-button" tabIndex="-1">
-                    <div className="py-1 px-4" role="none">
+                aria-labelledby="menu-button" tabIndex="-1"
+                style={{
+                  backgroundColor: colors.white,
+                }}>
+                    <div className="py-1 px-4" role="none"
+                    style={{
+                      color: colors.primary,
+                    }}>
                     <div
-                    className="text-gray-700 block py-2 text-sm
+                    className="text-gray-500 block py-2 text-sm
                     border-b border-opacity-50">
                         <h5>Signed in as:</h5>
                         <span className='font-semibold '>
                             text@text.com</span>
                     </div>
                     <a href="#"
-                    className="text-gray-700 block py-2 text-sm">
+                    className="block py-2 text-sm">
                         Account settings</a>
                     <a href="#"
-                    className="text-gray-700 block py-2 text-sm">
+                    className="block py-2 text-sm">
                         Support</a>
                     <form method="POST" action="#" role="none">
                         <button type="submit"
-                        className="text-gray-700 block w-full
+                        className="block w-full
                         text-left py-2 text-sm "
                         role="menuitem" tabIndex="-1"
                         id="menu-item-3">
@@ -217,14 +236,17 @@ const TopBar = ({searchBgColor, onClickFilter, onClickLogo, onChangeSearch,
             <div className='rounded-full w-full flex
               justify-center items-center px-3'
             style={{backgroundColor: searchBgColor || colors.primaryLight}}>
-              <NavIcons name={'search'}/>
+              <NavIcons name={'search'} color={colors.primary}/>
               <div className='w-full'>
                 <input className='bg-transparent focus:border-transparent
               hover:border-transparent focus-within:border-transparent
-              outline-none w-full px-2 placeholder-blue-900
+              outline-none w-full px-2 placeholder-blue-300
               placeholder-opacity-50'
                 placeholder='Search for Moviens / Tv Show'
-                onChange={onChangeSearch}/>
+                onChange={onChangeSearch}
+                style={{
+                  color: colors.primary,
+                }}/>
               </div>
             </div>
             <div>

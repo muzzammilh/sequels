@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import TopBar from './TopBar';
 import logo from '../../Images/logo.svg';
-import {colors} from '../../theme/colors';
 import LeftBarMobile from './LefBarMobile';
+import {useSelector} from 'react-redux';
 
 const NavBar = () => {
   const [shadow, setshadow] = useState();
+  const {colors} = useSelector((state) => state.theme);
   const myFunction = () => {
     if (window.scrollY>0) {
       shadow!=true && setshadow(true);

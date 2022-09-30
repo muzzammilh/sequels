@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import {colors} from '../../theme/colors';
 import PlainButton from '../../Components/Buttons/PlainButton';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {getpopularpeople} from '../../Redux/Actions/people';
 const People = () => {
+  const {colors} = useSelector((state) => state.theme);
   const {popularPeople} = useSelector((state) => state.people);
   const dispatch = useDispatch();
 

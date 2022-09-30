@@ -1,15 +1,17 @@
 import React from 'react';
-import {colors} from '../theme/colors';
+import {useSelector} from 'react-redux';
+
 
 const CircleProgress = ({radius = 35, color, percentage=50}) => {
+  const {colors} = useSelector((state) => state.theme);
   const circumference = 2 * Math.PI * (radius-6);
   return (
-    <div >
+    <div>
       <div className='relative flex justify-center items-center'
         style={{width: `${radius*2}px`, height: `${radius*2}px`}}>
         <svg className="rounded-full flex justify-center
         items-center -rotate-90 absolute"
-        style={{backgroundColor: colors.primary,
+        style={{backgroundColor: colors.primaryconst,
           width: `${radius*2}px`, height: `${radius*2}px`}}
         x-cloak aria-hidden="true">
           <circle

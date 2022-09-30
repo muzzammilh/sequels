@@ -5,7 +5,6 @@ import VerticalCard from '../Components/Cards/VerticalCard';
 import HorizontalCard from '../Components/Cards/HorizontalCard';
 import FeaturedCard from '../Components/Cards/FeaturedCard';
 import Spacer from '../Components/Basic/Spacer';
-import {colors} from '../theme/colors';
 import moment from 'moment';
 import {useDispatch, useSelector} from 'react-redux';
 import {getstreemingmovies, getforrentmovies, getontheatermovies, getmoviesbydate, getlatestmovie, getupcomingtrailers} from '../Redux/Actions/movies';
@@ -20,13 +19,14 @@ import {getpoppeople} from '../Redux/Actions/people';
 const Home = () => {
   const [activeDate, setActiveDate] = useState(0);
   const [date, setDate] = useState(Date.now());
+  const [popularIndex, setpopularIndex] = useState(0);
   const [activeTrailer, setActiveTrailer] = useState(0);
   const {streamedmovies, forrentmovies, ontheatermovies,
     moviesbydate, upcomingtrailers, latestmovie} = useSelector((state) => state.movies);
   const {popularTvShows} = useSelector((state) => state.tvshows);
   const {trendings} = useSelector((state) => state.trendings);
   const {popularPeople} = useSelector((state) => state.people);
-  const [popularIndex, setpopularIndex] = useState(0);
+  const {colors} = useSelector((state) => state.theme);
   const _popularData = {
     0: streamedmovies.results,
     1: popularTvShows.results,
@@ -95,8 +95,10 @@ const Home = () => {
                 </div>;
               })}
             </div>
-            <div className='h-full absolute md:w-5 right-0 top-0
-           bg-gradient-to-l from-white'/>
+            <div className='h-full absolute md:w-5 right-0 top-0'
+           style={{
+            background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+           }}/>
           </div>
         </div>
 
@@ -109,13 +111,14 @@ const Home = () => {
         <div>
           <div className='w-full flex items-center justify-between pb-8'>
             <h1 className='text-xl font-bold'>Movies By Date</h1>
-            <input className='min-w-min w-auto text-center
+            <input className='min-w-min w-auto text-center bg-transparent
               border rounded-full py-3 px-4 text-sm font-semibold
               focus:outline-none focus:shadow-outline'
             type={'date'}
             value={moment(date).format('YYYY-MM-DD')}
             onChange={(e) => setDate(e.target.value)}
-            style={{borderColor: colors.primary}}/>
+            style={{borderColor: colors.primary,
+            color: colors.primary}}/>
           </div>
           <div className='flex justify-between font-bold text-sm pb-4
           overflow-x-auto hide-scrollbar'>
@@ -155,8 +158,10 @@ const Home = () => {
                   }
                 })}
               </div>
-              <div className='h-full absolute md:w-5 right-0 top-0
-           bg-gradient-to-l from-white'/>
+              <div className='h-full absolute md:w-5 right-0 top-0'
+              style={{
+                background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+               }}/>
             </div>
           </div>
         </div>
@@ -200,8 +205,10 @@ const Home = () => {
                 </div>;
               })}
             </div>
-            <div className='h-full absolute md:w-5 right-0 top-0
-           bg-gradient-to-l from-white z-10'/>
+            <div className='h-full absolute md:w-5 right-0 top-0 z-10'
+            style={{
+              background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+             }}/>
             <div className='absolute w-full h-full left-0 -bottom-20'>
               <img className='cover'
                 src={soundWaves}/>
@@ -215,8 +222,7 @@ const Home = () => {
 
         {/* ----------- Latest Trailer Section ----------- */}
 
-        <div className='mt-8 py-4 pl-4 relative rounded-md'
-          style={{backgroundColor: colors.primary}}>
+        <div className='mt-8 py-4 pl-4 relative rounded-md'>
           <div className='relative z-10'>
             <h1 className='text-xl font-bold text-white'>Latest Trailers</h1>
           </div>
@@ -255,12 +261,14 @@ const Home = () => {
           }}>
               <div className='w-full h-full'
               style={{
-                backgroundColor: colors.primary,
+                backgroundColor: colors.black,
                 opacity: 0.7,
               }}/>
             </div>
-          <div className='h-full absolute md:w-5 right-0 top-0
-           bg-gradient-to-l from-white z-10'/>
+          <div className='h-full absolute md:w-5 right-0 top-0 z-10'
+          style={{
+            background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+           }}/>
         </div>
 
         {/* ---------------------- */}

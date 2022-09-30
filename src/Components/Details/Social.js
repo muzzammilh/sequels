@@ -2,10 +2,11 @@ import moment from 'moment';
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {Icon} from '../../Styles/icons';
-import {colors} from '../../theme/colors';
 import TabBar from '../NavBars/TabBar';
+import {useSelector} from 'react-redux';
 
 const Social = ({reviews}) => {
+  const {colors} = useSelector((state) => state.theme);
   const [active, setActive] = useState(0);
   const [readMore, setReadMore] = useState();
   const reviewsSection = () => {

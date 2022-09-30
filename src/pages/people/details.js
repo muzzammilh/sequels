@@ -5,9 +5,9 @@ import {clearpeopledetails, getpeoplecombinedcredits,
   getpeopledetails,
   getpeopleexternalids} from '../../Redux/Actions/people';
 import {Icon} from '../../Styles/icons';
-import {colors} from '../../theme/colors';
 
 const PeopleDetails = () => {
+  const {colors} = useSelector((state) => state.theme);
   const {id} = useParams();
   const {personDetails, personCredits,
     personExternalIds} = useSelector((state) => state.people);
@@ -61,15 +61,18 @@ const PeopleDetails = () => {
             {personExternalIds?.facebook_id && <a
             href={process.env.REACT_APP_FACEBOOK_LINK +
               personExternalIds.facebook_id}
-              target='_blank' rel="noreferrer"><Icon name={'facebook'}/></a>}
+              target='_blank' rel="noreferrer"><Icon name={'facebook'}
+              color={colors.primary}/></a>}
             {personExternalIds?.twitter_id &&<a
               href={process.env.REACT_APP_TWITTER_LINK +
                 personExternalIds.twitter_id}
-              target='_blank' rel="noreferrer"><Icon name={'twitter'}/></a>}
+              target='_blank' rel="noreferrer"><Icon name={'twitter'}
+              color={colors.primary}/></a>}
             {personExternalIds?.instagram_id&&<a
               href={process.env.REACT_APP_FACEBOOK_LINK +
                 personExternalIds.instagram_id}
-              target='_blank' rel="noreferrer"><Icon name={'instagram'}/></a>}
+              target='_blank' rel="noreferrer"><Icon name={'instagram'}
+              color={colors.primary}/></a>}
           </div>
           <div className='md:hidden border-l px-4'>
             <h1 className='text-2xl font-bold'>{personDetails?.name}</h1>
@@ -145,8 +148,11 @@ const PeopleDetails = () => {
                 );
               })}
             </div>
-            <div className='h-full absolute md:w-5 right-0 top-0
-           bg-gradient-to-l from-white'/>
+            <div className='h-full absolute md:w-5 right-0 top-0'
+            style={{
+              // eslint-disable-next-line max-len
+              background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+             }}/>
           </div>
         </div>
         {Object.keys(actingMemo).length != 0&&<div className='my-6'>

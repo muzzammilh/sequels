@@ -1,11 +1,12 @@
 
 import React, {useRef, useState, useEffect} from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const DropDown = ({color, label, disabled, backgroundColor, borderRadius,
   borderColor, className, fontSize, fontStyle, fontWeight, height, width,
   dropDownList, children, dropDownListWidth}) => {
   const [showDropDown, setDropDown] = useState(false);
+  const {colors} = useSelector((state) => state.theme);
   const ref = useRef();
   useEffect(()=>{
     const handleClickOutside = (event) => {

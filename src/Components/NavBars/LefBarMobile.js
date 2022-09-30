@@ -2,9 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import NavIcons from '../../Styles/NavIcons';
 import {strings} from '../../Styles/Strings';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const LeftBarMobile = () => {
+  const {colors} = useSelector((state) => state.theme);
   const [onclick, setonclick] = useState(0);
   const [close, setclose] = useState(false);
 

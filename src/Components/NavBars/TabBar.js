@@ -1,7 +1,8 @@
 import React from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const TabBar = ({className, tabList, onClick, fontSize}) => {
+  const {colors} = useSelector((state) => state.theme);
   const [activeTab, setActiveTab] = React.useState(0);
   return (
     <div>

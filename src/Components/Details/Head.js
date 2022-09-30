@@ -1,15 +1,16 @@
 import React, {useEffect, useMemo} from 'react';
 import Vibrant from 'node-vibrant';
-import {colors} from '../../theme/colors';
 import {Link} from 'react-router-dom';
 import CircleProgress from '../../Components/CircleProgress';
 import IconButton from '../../Components/Buttons/IconButton';
 import {DetailIcons} from '../../Styles/detailIcons';
 import moment from 'moment';
+import {useSelector} from 'react-redux';
 
 const Head = ({vibrant, setVibrant, forgorundColor, name, tagline,
   releaseDate, overview, voteAverage, runtime, crew, genres, posterPath,
   backdropPath, trailerClick}) => {
+  const {colors} = useSelector((state) => state.theme);
   const crewMap = useMemo(() => {
     const list = {};
     crew?.map((item) => {

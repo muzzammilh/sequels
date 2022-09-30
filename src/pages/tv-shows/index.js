@@ -2,12 +2,12 @@ import React, {useState, useEffect} from 'react';
 import VerticalCard from '../../Components/Cards/VerticalCard';
 import TabBar from '../../Components/NavBars/TabBar';
 import PlainButton from '../../Components/Buttons/PlainButton';
-import {colors} from '../../theme/colors';
 import {useSelector, useDispatch} from 'react-redux';
 import {getairingtodaytvshows, getonairtvshows,
   getpopulartvshows, gettopratedtvshows} from '../../Redux/Actions/tvShows';
 
 const TvShows = () => {
+  const {colors} = useSelector((state) => state.theme);
   const {popularTvShows, onAirTodayTvShows, onTvShow, topRatedTvShows} =
      useSelector((state) => state.tvshows);
   const [activeTab, setactiveTab] = useState(0);

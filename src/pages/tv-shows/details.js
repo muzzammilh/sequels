@@ -15,9 +15,9 @@ import {tvShowOverlay} from '../../Redux/Actions/overlay';
 import {cleartvshowdetails, getexternallinks, gettvshowcredits,
   gettvshowdetails, gettvshowimagesandvideos, gettvshowkeywords,
   gettvshowrecomendations, gettvshowreviews} from '../../Redux/Actions/tvShows';
-import {colors} from '../../theme/colors';
 
 const TvShowDetails = () => {
+  const {colors} = useSelector((state) => state.theme);
   const [vibrant, setVibrant] = useState(null);
   const forgorundColor = (parseInt(vibrant?.replace('#', ''), 16) >
   0xffffff / 2)? colors.primaryLight : colors.primary;

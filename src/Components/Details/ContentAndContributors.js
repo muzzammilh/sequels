@@ -1,7 +1,8 @@
 import React from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const ContentAndContributors = ({vibrant, forgroundColor}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div className='pt-4'>
       <div className='border-t py-6'>

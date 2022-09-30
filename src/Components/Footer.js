@@ -1,13 +1,15 @@
 import React from 'react';
-import {colors} from '../theme/colors';
 import Logo from '../Images/logo-2.svg';
 import {Link} from 'react-router-dom';
 import {strings} from '../Styles/Strings';
+import {useSelector} from 'react-redux';
+
 const Footer = () => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div className='w-full flex justify-center items-center
     float-bottom px-8 py-20 relative z-50'
-    style={{backgroundColor: colors.primary, minHeight: '50vh'}}>
+    style={{backgroundColor: colors.primaryconst, minHeight: '50vh'}}>
       <div className='grid grid-cols-2 md:grid-cols-5 gap-12'>
         <div className='flex flex-col justify-between gap-4
         items-end col-span-2 md:col-span-1' style={{minHeight: '18vh'}}>

@@ -1,9 +1,10 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Icon} from '../../Styles/icons';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const Casts = ({cast}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div className='my-4 w-full'>
       <div className='w-full flex justify-between items-center'>
@@ -17,8 +18,9 @@ const Casts = ({cast}) => {
       </div>
       <div className='relative'>
         <div className='flex gap-4 overflow-x-auto w-full'>
-          {cast?.map((item, index) => {
-            return <Link to={'#'} className='py-6 flex' key={item.id}>
+          {cast?.map((item) => {
+            return <Link to={`/people/details/${item.id}`}
+            className='py-6 flex' key={item.id}>
               <div className='w-36 rounded-md overflow-hidden shadow-lg'>
                 <div className='h-44 bg-gray-200 overflow-hidden'>
                   {item.profile_path&&<img
@@ -48,8 +50,11 @@ const Casts = ({cast}) => {
             </button>
           </div>
         </div>
-        <div className='absolute h-full top-0 right-0 md:w-6
-        bg-gradient-to-l from-white'/>
+        <div className='absolute h-full top-0 right-0 md:w-6'
+        style={{
+          // eslint-disable-next-line max-len
+          background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+         }}/>
       </div>
     </div>
   );

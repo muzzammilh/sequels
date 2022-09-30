@@ -1,7 +1,9 @@
 import React from 'react';
 import HorizontalCard from '../Cards/HorizontalCard';
+import {useSelector} from 'react-redux';
 
 const Recomendation = ({data}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div className='py-4'>
       <div>
@@ -25,8 +27,11 @@ const Recomendation = ({data}) => {
             })
           }
         </div>
-        <div className='absolute h-full top-0 right-0 md:w-6
-        bg-gradient-to-l from-white'/>
+        <div className='absolute h-full top-0 right-0 md:w-6'
+        style={{
+          // eslint-disable-next-line max-len
+          background: 'linear-gradient(to right, rgba(0,0,0,0) 0%, ' + colors.white + ' 100%)',
+         }}/>
       </div>
     </div>
   );

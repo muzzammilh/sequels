@@ -1,7 +1,8 @@
 import React from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const PercentageBar = ({percentage, value, color1, color2, height, width}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div className='w-full h-2 rounded-full flex items-center gap-2'
       style={{height, width}}>

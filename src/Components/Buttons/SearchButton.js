@@ -1,7 +1,8 @@
 import React from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const SearchButton = ({onChange, iconHeight, height, width}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div className='flex rounded-full justify-center items-center px-4'
       style={{backgroundColor: colors.gray, width, height}}>

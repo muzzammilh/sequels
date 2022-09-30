@@ -1,7 +1,8 @@
 import React from 'react';
-import {colors} from '../../theme/colors';
+import {useSelector} from 'react-redux';
 
 const Keywords = ({list}) => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <div>
       <div>

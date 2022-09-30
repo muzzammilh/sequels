@@ -19,12 +19,17 @@ import NavBar from './Components/NavBars/NavBar';
 import OverlayVideo from './Components/Basic/OverlayVideo';
 import ScrollToTop from './Components/ScrollToTop';
 import LeftBar from './Components/NavBars/LeftBar';
+import {useSelector} from 'react-redux';
 
 const App = () => {
+  const {colors} = useSelector((state) => state.theme);
   return (
     <>
       <Router>
-        <div className='flex'>
+        <div className='flex' style={{
+          backgroundColor: colors.white,
+          color: colors.primary,
+        }}>
           <LeftBar/>
           <div className='w-full md:w-5/6 min-h-screen float-right
           mt-32 md:mt-24 relative px-4'>
