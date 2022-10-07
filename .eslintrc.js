@@ -19,5 +19,7 @@ module.exports = {
   ],
   'rules': {
     'react/prop-types': 0,
+    'template-curly-spacing': 'off',
+    'indent': 'off',
   },
 };
